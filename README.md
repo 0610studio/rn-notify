@@ -20,14 +20,14 @@ showAlert({
         primary: {
             label: '확인',
             onPress: () => {
-            cardRegist();
+                console.log('확인');
             },
         },
         // 옵셔널, 없으면 단일 Text 버튼
         secondary: {
             label: '취소',
             onPress: () => {
-            console.log('취소');
+                console.log('취소');
             },
         }
     }

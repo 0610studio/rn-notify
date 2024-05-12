@@ -5,12 +5,12 @@ import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
 import BottomSheetNotify from '../ui/BottomSheetNotify';
 
-const ThemeContext = createContext<NotifyProps | null>(null);
+const NotifyContext = createContext<NotifyProps | null>(null);
 
 export const useNotify = () => {
-    const context = useContext(ThemeContext);
+    const context = useContext(NotifyContext);
     if (!context) {
-        throw new Error('useNotify must be used within a ThemeProvider');
+        throw new Error('useNotify must be used within a NotifyProvider');
     }
     return context;
 }
@@ -90,7 +90,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
     };
 
     return (
-        <ThemeContext.Provider value={{
+        <NotifyContext.Provider value={{
             alertVisible,
             setAlertVisible,
             actions,
@@ -126,6 +126,6 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
                 bottomSheetMarginX={bottomSheetMarginX}
                 isBottomRadius={isBottomRadius}
             />
-        </ThemeContext.Provider>
+        </NotifyContext.Provider>
     );
 }
