@@ -80,9 +80,15 @@ const useBottomSheetNotify = ({
         ],
     }));
 
+    const initBottomSheet = useCallback(() => {
+        screenHeight.value = 1;
+        openPosition.value = 0;
+    }, []);
+
     const backPressHandler = useCallback(() => {
         if (bottomSheetVisible) {
             setBottomSheetVisible(false);
+            initBottomSheet();
             return true;
         }
         return false;
@@ -159,6 +165,7 @@ const useBottomSheetNotify = ({
             fullScreen.value = false;
             setTimeout(() => {
                 setBottomSheetVisible(false);
+                initBottomSheet();
             }, 200);
         }
     }
