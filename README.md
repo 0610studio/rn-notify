@@ -3,9 +3,11 @@
 - App.tsx
 
 ```tsx
-<NotifyProvider>
-  ...
-</NotifyProvider>
+<SafeAreaProvider>
+    <NotifyProvider>
+        ...
+    </NotifyProvider>
+</SafeAreaProvider>
 ```
 
 - target component.tsx

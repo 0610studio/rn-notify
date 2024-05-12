@@ -13,6 +13,9 @@ const NotifyExample = () => {
                         showAlert({
                             title: '타이틀 테스트 길어지면 줄바꿈이 될 수 있습니다.',
                             informative: '테스트 informative 길어지면 줄바꿈이 될 수 있습니다.',
+                            primaryButtonStyle: {
+                                backgroundColor: 'red',
+                            },
                             actions: {
                                 primary: {
                                     label: '확인',

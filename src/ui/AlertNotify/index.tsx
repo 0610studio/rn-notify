@@ -1,17 +1,25 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { Dimensions, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TouchableOpacity, View, BackHandler } from 'react-native';
 import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 import { useNotify } from '../../model/useNotifyProvider';
-import { AlertActions } from '../../model/types';
+import { AlertActions, ShowAlertProps } from '../../model/types';
 
-const AlertNotify: FunctionComponent<{}> = function Alert() {
+const AlertNotify = ({
+  actions,
+  title,
+  informative,
+  isBackgroundTouchClose,
+  titleStyle,
+  informativeStyle,
+  secondaryButtonStyle,
+  primaryButtonStyle,
+  secondaryButtonTextStyle,
+  primaryButtonTextStyle,
+  singleButtonTextStyle
+}: ShowAlertProps) => {
   const {
     alertVisible,
-    setAlertVisible,
-    actions,
-    isBackgroundTouchClose,
-    title,
-    informative,
+    setAlertVisible
   } = useNotify();
 
   const modalWidth = Dimensions.get('window').width - 60;
@@ -48,30 +56,30 @@ const AlertNotify: FunctionComponent<{}> = function Alert() {
         <Pressable
           style={[styles.contentContainer, { width: modalWidth }]}
         >
-          {title && <Text style={styles.title}>{title}</Text>}
-          {informative && <Text style={styles.informative}>{informative}</Text>}
+          {title && <Text style={[styles.title, titleStyle]}>{title}</Text>}
+          {informative && <Text style={[styles.informative, informativeStyle]}>{informative}</Text>}
           {actions && (
             <View style={styles.buttonContainer}>
               {secondary ? (
                 <>
                   <TouchableOpacity
-                    style={[styles.button, { backgroundColor: '#E7E7E7', marginRight: 8 }]}
-                    onPress={handleButtonPress(secondary.onPress)}>
-                    <Text numberOfLines={1} style={[styles.buttonText, { color: '#393939' }]}>{secondary.label}</Text>
+                    style={[styles.button, { backgroundColor: '#E7E7E7', marginRight: 8 }, secondaryButtonStyle]}
+                    onPress={handleButtonPress(secondary?.onPress)}>
+                    <Text numberOfLines={1} style={[styles.buttonText, { color: '#393939' }, secondaryButtonTextStyle]}>{secondary.label}</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    style={[styles.button, { backgroundColor: '#26B0EB' }]}
-                    onPress={handleButtonPress(primary.onPress)}>
-                    <Text numberOfLines={1} style={[styles.buttonText, { color: 'white' }]}>{primary.label}</Text>
+                    style={[styles.button, { backgroundColor: '#26B0EB' }, primaryButtonStyle]}
+                    onPress={handleButtonPress(primary?.onPress)}>
+                    <Text numberOfLines={1} style={[styles.buttonText, { color: 'white' }, primaryButtonTextStyle]}>{primary?.label}</Text>
                   </TouchableOpacity>
                 </>
               ) : (
                 <TouchableOpacity
-                  onPress={handleButtonPress(primary.onPress)}
+                  onPress={handleButtonPress(primary?.onPress)}
                   hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                 >
-                  <Text numberOfLines={1} style={[styles.buttonText, { color: '#0074E9', textAlign: 'right', marginBottom: 5, marginRight: 5 }]}>{primary.label}</Text>
+                  <Text numberOfLines={1} style={[styles.buttonText, { color: '#0074E9', textAlign: 'right', marginBottom: 5, marginRight: 5 }, singleButtonTextStyle]}>{primary?.label}</Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -110,6 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#212B3699',
+    zIndex: 9999,
   },
   title: {
     color: '#232323',

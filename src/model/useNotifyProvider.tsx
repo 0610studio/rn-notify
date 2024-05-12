@@ -1,5 +1,5 @@
 import { createContext, useContext, useRef, useState } from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, TextProps, TouchableOpacityProps } from 'react-native';
 import { AlertActions, BottomSheetRef, NotifyProps, NotifyProviderProps, ShowAlertProps, ShowSnackBarProps, SnackType } from './types';
 import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
@@ -21,6 +21,13 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
     const [alertVisible, setAlertVisible] = useState<boolean>(false);
     const [actions, setActions] = useState<AlertActions>();
     const [isBackgroundTouchClose, setIsBackgroundTouchClose] = useState<boolean>(true);
+    const [titleStyle, setTitleStyle] = useState<TextProps['style']>();
+    const [informativeStyle, setInformativeStyle] = useState<TextProps['style']>();
+    const [secondaryButtonStyle, setSecondaryButtonStyle] = useState<TouchableOpacityProps['style']>();
+    const [primaryButtonStyle, setPrimaryButtonStyle] = useState<TouchableOpacityProps['style']>();
+    const [secondaryButtonTextStyle, setSecondaryButtonTextStyle] = useState<TextProps['style']>();
+    const [primaryButtonTextStyle, setPrimaryButtonTextStyle] = useState<TextProps['style']>();
+    const [singleButtonTextStyle, setSingleButtonTextStyle] = useState<TextProps['style']>();
 
     const [snackVisible, setSnackVisible] = useState<boolean>(false);
     const [snackMessage, setSnackMessage] = useState<string>('');
@@ -41,14 +48,29 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         title,
         informative,
         actions,
-        isBackgroundTouchClose = true
+        isBackgroundTouchClose = true,
+        titleStyle,
+        informativeStyle,
+        secondaryButtonStyle,
+        primaryButtonStyle,
+        secondaryButtonTextStyle,
+        primaryButtonTextStyle,
+        singleButtonTextStyle
     }: ShowAlertProps) => {
         Keyboard.dismiss();
         setTitle(title);
         setInformative(informative);
-        setActions(actions);
+        setActions(actions|| {} as AlertActions);
         setIsBackgroundTouchClose(isBackgroundTouchClose);
         setAlertVisible(true);
+
+        setTitleStyle(titleStyle);
+        setInformativeStyle(informativeStyle);
+        setSecondaryButtonStyle(secondaryButtonStyle);
+        setPrimaryButtonStyle(primaryButtonStyle);
+        setSecondaryButtonTextStyle(secondaryButtonTextStyle);
+        setPrimaryButtonTextStyle(primaryButtonTextStyle);
+        setSingleButtonTextStyle(singleButtonTextStyle);
     };
 
     const showSnackBar = ({
@@ -93,10 +115,6 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         <NotifyContext.Provider value={{
             alertVisible,
             setAlertVisible,
-            actions,
-            isBackgroundTouchClose,
-            title,
-            informative,
             // ---
             snackVisible,
             snackMessage,
@@ -112,10 +130,6 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         }}>
             {children}
 
-            <AlertNotify />
-            <SnackbarNotify
-                customSnackbar={customSnackbar}
-            />
             <BottomSheetNotify
                 ref={bottomSheetRef}
                 contentsGestureEnable={contentsGestureEnable}
@@ -125,6 +139,24 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
                 isHandleVisible={handleVisible}
                 bottomSheetMarginX={bottomSheetMarginX}
                 isBottomRadius={isBottomRadius}
+            />
+
+            <SnackbarNotify
+                customSnackbar={customSnackbar}
+            />
+
+            <AlertNotify 
+                title={title}
+                informative={informative}
+                actions={actions || {} as AlertActions}
+                isBackgroundTouchClose={isBackgroundTouchClose}
+                titleStyle={titleStyle}
+                informativeStyle={informativeStyle}
+                secondaryButtonStyle={secondaryButtonStyle}
+                primaryButtonStyle={primaryButtonStyle}
+                secondaryButtonTextStyle={secondaryButtonTextStyle}
+                primaryButtonTextStyle={primaryButtonTextStyle}
+                singleButtonTextStyle={singleButtonTextStyle}
             />
         </NotifyContext.Provider>
     );

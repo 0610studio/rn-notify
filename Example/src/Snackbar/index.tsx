@@ -22,12 +22,6 @@ const SnackBar = ({ snackType, snackMessage }: any) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        zIndex: 99999,
-        width: '100%',
-        alignItems: 'center',
-        position: 'absolute',
-    },
     snackbar: {
         width: '90%',
         borderRadius: 14,

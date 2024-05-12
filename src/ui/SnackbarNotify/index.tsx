@@ -68,7 +68,7 @@ const SnackbarNotify = ({
 
 const styles = StyleSheet.create({
     container: {
-        zIndex: 99999,
+        zIndex: 9998,
         width: '100%',
         alignItems: 'center',
         position: 'absolute',

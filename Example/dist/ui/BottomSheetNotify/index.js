@@ -67,7 +67,7 @@ var styles = StyleSheet.create({
     },
     sheet: {
         position: 'absolute',
-        zIndex: 5005,
+        zIndex: 9000,
         overflow: 'hidden'
     },
     handleContainer: {

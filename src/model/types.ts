@@ -1,12 +1,9 @@
 import { ReactNode } from "react";
+import { TextProps, TouchableOpacityProps } from "react-native";
 
 export interface NotifyProps {
     alertVisible: boolean;
     setAlertVisible: (visible: boolean) => void;
-    actions?: AlertActions;
-    isBackgroundTouchClose: boolean;
-    title: string;
-    informative: string;
     // ---
     snackVisible: boolean;
     snackMessage: string;
@@ -41,6 +38,13 @@ export interface ShowAlertProps {
     informative: string;
     actions: AlertActions;
     isBackgroundTouchClose?: boolean;
+    titleStyle?: TextProps['style'];
+    informativeStyle?: TextProps['style'];
+    secondaryButtonStyle?: TouchableOpacityProps['style'];
+    primaryButtonStyle?: TouchableOpacityProps['style'];
+    secondaryButtonTextStyle?: TextProps['style'];
+    primaryButtonTextStyle?: TextProps['style'];
+    singleButtonTextStyle?: TextProps['style'];
 }
 
 export interface AlertActions {
