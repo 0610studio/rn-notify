@@ -62,7 +62,7 @@ export var NotifyProvider = function (_a) {
     };
     var showBottomSheet = function (_a) {
         var _b;
-        var _c = _a.isHandleVisible, isHandleVisible = _c === void 0 ? true : _c, component = _a.component, _d = _a.contentsGestureEnable, contentsGestureEnable = _d === void 0 ? true : _d, _e = _a.marginHorizontal, marginHorizontal = _e === void 0 ? 20 : _e, _f = _a.padding, padding = _f === void 0 ? 20 : _f, _g = _a.marginBottom, marginBottom = _g === void 0 ? 0 : _g, _h = _a.isBottomRadius, isBottomRadius = _h === void 0 ? true : _h;
+        var _c = _a.isHandleVisible, isHandleVisible = _c === void 0 ? true : _c, component = _a.component, _d = _a.contentsGestureEnable, contentsGestureEnable = _d === void 0 ? true : _d, _e = _a.marginHorizontal, marginHorizontal = _e === void 0 ? 20 : _e, _f = _a.padding, padding = _f === void 0 ? 20 : _f, _g = _a.marginBottom, marginBottom = _g === void 0 ? 10 : _g, _h = _a.isBottomRadius, isBottomRadius = _h === void 0 ? true : _h;
         Keyboard.dismiss();
         setHandleVisible(isHandleVisible);
         setBottomSheetPadding(padding);
@@ -72,6 +72,22 @@ export var NotifyProvider = function (_a) {
         setBottomSheetMarginX(marginHorizontal);
         setIsBottomRadius(isBottomRadius);
         (_b = bottomSheetRef.current) === null || _b === void 0 ? void 0 : _b.handleVisible(true);
+    };
+    var hideNotify = function (option) {
+        if (option === 'all') {
+            setAlertVisible(false);
+            setSnackVisible(false);
+            setBottomSheetVisible(false);
+        }
+        else if (option === 'alert') {
+            setAlertVisible(false);
+        }
+        else if (option === 'snack') {
+            setSnackVisible(false);
+        }
+        else if (option === 'bottomSheet') {
+            setBottomSheetVisible(false);
+        }
     };
     return (<NotifyContext.Provider value={{
             alertVisible: alertVisible,
@@ -84,7 +100,8 @@ export var NotifyProvider = function (_a) {
             setBottomSheetVisible: setBottomSheetVisible,
             showAlert: showAlert,
             showSnackBar: showSnackBar,
-            showBottomSheet: showBottomSheet
+            showBottomSheet: showBottomSheet,
+            hideNotify: hideNotify,
         }}>
             {children}
 

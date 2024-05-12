@@ -20,6 +20,7 @@ export interface NotifyProps {
         component: React.ReactNode;
         contentsGestureEnable?: boolean;
     }) => void;
+    hideNotify: (option: HideOption) => void;
 }
 export interface CustomSnackbarProps {
     snackType: SnackType;
@@ -51,6 +52,7 @@ export interface AlertActions {
     secondary?: AlertAction;
 }
 export type SnackType = 'success' | 'error' | '';
+export type HideOption = 'all' | 'snack' | 'alert' | 'bottomSheet';
 export interface ShowSnackBarProps {
     message: string;
     type?: SnackType;

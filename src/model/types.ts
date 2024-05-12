@@ -16,6 +16,8 @@ export interface NotifyProps {
     showAlert: (props: ShowAlertProps) => void;
     showSnackBar: (props: ShowSnackBarProps) => void;
     showBottomSheet: (props: { isBottomRadius?: boolean; marginHorizontal?: number; isHandleVisible?: boolean; marginBottom?: number; padding?: number; component: React.ReactNode; contentsGestureEnable?: boolean }) => void;
+    // ---
+    hideNotify: (option: HideOption) => void;
 }
 
 export interface CustomSnackbarProps {
@@ -54,6 +56,8 @@ export interface AlertActions {
 }
 
 export type SnackType = 'success' | 'error' | '';
+
+export type HideOption = 'all' | 'snack' | 'alert' | 'bottomSheet';
 
 export interface ShowSnackBarProps {
     message: string;

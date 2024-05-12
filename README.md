@@ -1,3 +1,13 @@
+## 설치
+
+```bash
+"react-native-gesture-handler": "^2.16.0",
+"react-native-reanimated": "^3.8.1",
+"react-native-safe-area-context": "^4.9.0"
+
+npm i @0610studio/rn-notify
+```
+
 ## 사용법
 
 - App.tsx

@@ -1,6 +1,6 @@
 import { createContext, useContext, useRef, useState } from 'react';
 import { Keyboard, TextProps, TouchableOpacityProps } from 'react-native';
-import { AlertActions, BottomSheetRef, NotifyProps, NotifyProviderProps, ShowAlertProps, ShowSnackBarProps, SnackType } from './types';
+import { AlertActions, BottomSheetRef, HideOption, NotifyProps, NotifyProviderProps, ShowAlertProps, ShowSnackBarProps, SnackType } from './types';
 import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
 import BottomSheetNotify from '../ui/BottomSheetNotify';
@@ -60,7 +60,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         Keyboard.dismiss();
         setTitle(title);
         setInformative(informative);
-        setActions(actions|| {} as AlertActions);
+        setActions(actions || {} as AlertActions);
         setIsBackgroundTouchClose(isBackgroundTouchClose);
         setAlertVisible(true);
 
@@ -89,7 +89,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         contentsGestureEnable = true,
         marginHorizontal = 20,
         padding = 20,
-        marginBottom = 0,
+        marginBottom = 10,
         isBottomRadius = true
     }: {
         isHandleVisible?: boolean;
@@ -111,6 +111,21 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         bottomSheetRef.current?.handleVisible(true);
     };
 
+    const hideNotify = (option: HideOption) => {
+        if (option === 'all') {
+            setAlertVisible(false);
+            setSnackVisible(false);
+            setBottomSheetVisible(false);
+        } else if (option === 'alert') {
+            setAlertVisible(false);
+        } else if (option === 'snack') {
+            setSnackVisible(false);
+        } else if (option === 'bottomSheet') {
+            setBottomSheetVisible(false);
+        }
+    };
+
+
     return (
         <NotifyContext.Provider value={{
             alertVisible,
@@ -126,7 +141,9 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
             // ---
             showAlert,
             showSnackBar,
-            showBottomSheet
+            showBottomSheet,
+            // ---
+            hideNotify,
         }}>
             {children}
 
@@ -145,7 +162,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
                 customSnackbar={customSnackbar}
             />
 
-            <AlertNotify 
+            <AlertNotify
                 title={title}
                 informative={informative}
                 actions={actions || {} as AlertActions}
