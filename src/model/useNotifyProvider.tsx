@@ -1,6 +1,6 @@
 import { createContext, useContext, useRef, useState } from 'react';
 import { Keyboard, TextProps, TouchableOpacityProps } from 'react-native';
-import { AlertActions, BottomSheetRef, HideOption, NotifyProps, NotifyProviderProps, ShowAlertProps, ShowSnackBarProps, SnackType } from './types';
+import { AlertActions, BottomSheetRef, HideOption, NotifyProps, NotifyProviderProps, ShowAlertProps, ShowBottomSheetProps, ShowSnackBarProps, SnackType } from './types';
 import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
 import BottomSheetNotify from '../ui/BottomSheetNotify';
@@ -35,6 +35,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
 
     const [contentsGestureEnable, setContentsGestureEnable] = useState<boolean>(false);
     const [bottomSheetVisible, setBottomSheetVisible] = useState<boolean>(false);
+    const [bottomSheetBackgroundColor, setBottomSheetBackgroundColor] = useState<string>('#ffffff');
     const [bottomSheetComponent, setBottomSheetComponent] = useState<React.ReactNode>(false);
     const [bottomSheetPadding, setBottomSheetPadding] = useState<number>(0);
     const [bottomSheetMarginX, setBottomSheetMarginX] = useState<number>(0);
@@ -87,19 +88,12 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         isHandleVisible = true,
         component,
         contentsGestureEnable = true,
-        marginHorizontal = 20,
+        marginHorizontal = 10,
         padding = 20,
         marginBottom = 10,
+        backgroundColor = '#ffffff',
         isBottomRadius = true
-    }: {
-        isHandleVisible?: boolean;
-        component: React.ReactNode;
-        contentsGestureEnable?: boolean;
-        marginHorizontal?: number;
-        padding?: number;
-        marginBottom?: number;
-        isBottomRadius?: boolean;
-    }) => {
+    }: ShowBottomSheetProps) => {
         Keyboard.dismiss();
         setHandleVisible(isHandleVisible);
         setBottomSheetPadding(padding);
@@ -108,6 +102,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         setMarginBottomBs(marginBottom);
         setBottomSheetMarginX(marginHorizontal);
         setIsBottomRadius(isBottomRadius);
+        setBottomSheetBackgroundColor(backgroundColor);
         bottomSheetRef.current?.handleVisible(true);
     };
 
@@ -156,6 +151,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
                 isHandleVisible={handleVisible}
                 bottomSheetMarginX={bottomSheetMarginX}
                 isBottomRadius={isBottomRadius}
+                bottomSheetBackgroundColor={bottomSheetBackgroundColor}
             />
 
             <SnackbarNotify

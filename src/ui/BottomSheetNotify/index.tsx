@@ -11,6 +11,7 @@ const DEFAULT_BORDER_RADIUS = 24;
 interface Props extends ViewProps {
   marginBottomBS: number;
   bottomSheetPadding: number;
+  bottomSheetBackgroundColor: string;
   closeOffset?: number;
   contentsGestureEnable: boolean;
   bottomSheetComponent: React.ReactNode;
@@ -22,6 +23,7 @@ interface Props extends ViewProps {
 const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
   marginBottomBS,
   bottomSheetPadding,
+  bottomSheetBackgroundColor,
   closeOffset = Dimensions.get('window').height,
   contentsGestureEnable,
   bottomSheetComponent,
@@ -81,6 +83,7 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
                 borderTopRightRadius: DEFAULT_BORDER_RADIUS,
                 borderBottomLeftRadius: isBottomRadius ? DEFAULT_BORDER_RADIUS : 0,
                 borderBottomRightRadius: isBottomRadius ? DEFAULT_BORDER_RADIUS : 0,
+                backgroundColor: bottomSheetBackgroundColor,
               }, bsAnimatedStyle]}>
                 <Pressable
                   onPress={() => {
