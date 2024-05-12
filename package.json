@@ -9,9 +9,7 @@
     "start": "cd Example && react-native start",
     "android": "cd Example && react-native run-android",
     "ios": "cd Example && react-native run-ios",
-    "build:npm": "rm -rf dist && tsc && rm -rf Example/dist && tsc -w --outDir Example/dist",
-    "postinstall": "cd Example && npm install && cd ios && pod install"
-  
+    "build:npm": "rm -rf dist && tsc && rm -rf Example/dist && tsc -w --outDir Example/dist"
   },
   "dependencies": {
     "react": "18.2.0",
