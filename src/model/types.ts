@@ -21,10 +21,14 @@ export interface NotifyProps {
     showBottomSheet: (props: { isBottomRadius?: boolean; marginHorizontal?: number; isHandleVisible?: boolean; marginBottom?: number; padding?: number; component: React.ReactNode; contentsGestureEnable?: boolean }) => void;
 }
 
+export interface CustomSnackbarProps {
+    snackType: SnackType;
+    snackMessage: string;
+}
 
 export interface NotifyProviderProps {
     children: ReactNode;
-    customSnackbar?: ReactNode;
+    customSnackbar?: (props: CustomSnackbarProps) => React.ReactNode;
 }
 
 export interface AlertAction {

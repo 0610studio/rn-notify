@@ -48,7 +48,7 @@ var SnackbarNotify = function (_a) {
     };
     return snackVisible ? (<Animated.View style={[styles.container, { top: snackbarPosition.y }]}>
             {customSnackbar ?
-            customSnackbar
+            customSnackbar({ snackType: snackType, snackMessage: snackMessage })
             : (<TouchableOpacity activeOpacity={1} onPress={function () { }} style={[styles.snackbar, { borderColor: snackType === 'error' ? '#f7cdcd' : '#c6e4c9', backgroundColor: snackType === 'error' ? '#fae6e6' : '#eef7ef' }]}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>

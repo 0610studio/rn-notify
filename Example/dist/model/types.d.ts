@@ -24,9 +24,13 @@ export interface NotifyProps {
         contentsGestureEnable?: boolean;
     }) => void;
 }
+export interface CustomSnackbarProps {
+    snackType: SnackType;
+    snackMessage: string;
+}
 export interface NotifyProviderProps {
     children: ReactNode;
-    customSnackbar?: ReactNode;
+    customSnackbar?: (props: CustomSnackbarProps) => React.ReactNode;
 }
 export interface AlertAction {
     label: string;

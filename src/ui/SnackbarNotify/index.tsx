@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, View, Animated, Text, TouchableOpacity, Platform } from "react-native";
 import { useNotify } from "../../model/useNotifyProvider";
+import { CustomSnackbarProps } from "../../model/types";
 
 const CLOSED_POSITION = -100;
 const OPEN_POSITION_OFFSET = 10;
@@ -9,9 +10,12 @@ const SNACKBAR_DURATION = 4000;
 const ANIMATION_DURATION = 200;
 const DELAY_BEFORE_OPEN = 300;
 
+
+
+
 const SnackbarNotify = ({
     customSnackbar
-}: { customSnackbar?: ReactNode }) => {
+}: { customSnackbar?: (props: CustomSnackbarProps) => ReactNode }) => {
     const { top } = useSafeAreaInsets();
     const { snackVisible, setSnackVisible, snackMessage, snackType } = useNotify();
     const [snackbarPosition] = useState(new Animated.ValueXY({ x: 0, y: CLOSED_POSITION }));
@@ -22,7 +26,7 @@ const SnackbarNotify = ({
             const closeTimeout = setTimeout(close, SNACKBAR_DURATION);
             return () => clearTimeout(closeTimeout);
         }
-        return () => {};
+        return () => { };
     }, [snackVisible]);
 
     const open = () => {
@@ -46,7 +50,7 @@ const SnackbarNotify = ({
         <Animated.View style={[styles.container, { top: snackbarPosition.y }]}>
             {
                 customSnackbar ?
-                    customSnackbar
+                    customSnackbar({ snackType, snackMessage })
                     : (
                         <TouchableOpacity activeOpacity={1} onPress={() => { }}
                             style={[styles.snackbar, { borderColor: snackType === 'error' ? '#f7cdcd' : '#c6e4c9', backgroundColor: snackType === 'error' ? '#fae6e6' : '#eef7ef' }]}>

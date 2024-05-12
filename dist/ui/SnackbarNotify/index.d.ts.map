@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/ui/SnackbarNotify/index.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,EAAE,SAAS,EAAuB,MAAM,OAAO,CAAC;AAW9D,QAAA,MAAM,cAAc;qBAEE,SAAS;8BAiD9B,CAAC;AAsBF,eAAe,cAAc,CAAC"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/ui/SnackbarNotify/index.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,EAAE,SAAS,EAAuB,MAAM,OAAO,CAAC;AAI9D,OAAO,EAAE,mBAAmB,EAAE,MAAM,mBAAmB,CAAC;AAWxD,QAAA,MAAM,cAAc;8BAEU,mBAAmB,KAAK,SAAS;8BAiD9D,CAAC;AAsBF,eAAe,cAAc,CAAC"}
