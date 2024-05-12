@@ -1,3 +1,8 @@
+
+
+https://github.com/0610studio/rn-notify/assets/39161206/15e46840-3c79-4310-972e-421316913be8
+
+
 ## 설치
 
 ```bash
