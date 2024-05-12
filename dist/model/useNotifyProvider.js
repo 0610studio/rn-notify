@@ -3,11 +3,11 @@ import { Keyboard } from 'react-native';
 import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
 import BottomSheetNotify from '../ui/BottomSheetNotify';
-var ThemeContext = createContext(null);
+var NotifyContext = createContext(null);
 export var useNotify = function () {
-    var context = useContext(ThemeContext);
+    var context = useContext(NotifyContext);
     if (!context) {
-        throw new Error('useNotify must be used within a ThemeProvider');
+        throw new Error('useNotify must be used within a NotifyProvider');
     }
     return context;
 };
@@ -59,7 +59,7 @@ export var NotifyProvider = function (_a) {
         setIsBottomRadius(isBottomRadius);
         (_b = bottomSheetRef.current) === null || _b === void 0 ? void 0 : _b.handleVisible(true);
     };
-    return (<ThemeContext.Provider value={{
+    return (<NotifyContext.Provider value={{
             alertVisible: alertVisible,
             setAlertVisible: setAlertVisible,
             actions: actions,
@@ -81,6 +81,6 @@ export var NotifyProvider = function (_a) {
             <AlertNotify />
             <SnackbarNotify customSnackbar={customSnackbar}/>
             <BottomSheetNotify ref={bottomSheetRef} contentsGestureEnable={contentsGestureEnable} bottomSheetComponent={bottomSheetComponent} bottomSheetPadding={bottomSheetPadding} marginBottomBS={marginBottomBS} isHandleVisible={handleVisible} bottomSheetMarginX={bottomSheetMarginX} isBottomRadius={isBottomRadius}/>
-        </ThemeContext.Provider>);
+        </NotifyContext.Provider>);
 };
 //# sourceMappingURL=useNotifyProvider.js.map
