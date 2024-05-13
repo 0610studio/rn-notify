@@ -1,9 +1,11 @@
 import { createContext, useContext, useRef, useState } from 'react';
-import { Keyboard, TextProps, TouchableOpacityProps } from 'react-native';
+import { Dimensions, Keyboard, TextProps, TouchableOpacityProps } from 'react-native';
 import { AlertActions, BottomSheetRef, HideOption, NotifyProps, NotifyProviderProps, ShowAlertProps, ShowBottomSheetProps, ShowSnackBarProps, SnackType } from './types';
 import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
 import BottomSheetNotify from '../ui/BottomSheetNotify';
+
+const BS_MAX_HEIGHT = Dimensions.get('window').height - 120;
 
 const NotifyContext = createContext<NotifyProps | null>(null);
 
@@ -39,6 +41,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
     const [bottomSheetComponent, setBottomSheetComponent] = useState<React.ReactNode>(false);
     const [bottomSheetPadding, setBottomSheetPadding] = useState<number>(0);
     const [bottomSheetMarginX, setBottomSheetMarginX] = useState<number>(0);
+    const [bottomSheetMaxHeight, setBottomSheetMaxHeight] = useState<number>(BS_MAX_HEIGHT);
     const [isBottomRadius, setIsBottomRadius] = useState<boolean>(true);
     const [handleVisible, setHandleVisible] = useState<boolean>(true);
     const [marginBottomBS, setMarginBottomBs] = useState<number>(0);
@@ -92,7 +95,8 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         padding = 20,
         marginBottom = 10,
         backgroundColor = '#ffffff',
-        isBottomRadius = true
+        isBottomRadius = true,
+        maxHeight = BS_MAX_HEIGHT,
     }: ShowBottomSheetProps) => {
         Keyboard.dismiss();
         setHandleVisible(isHandleVisible);
@@ -103,6 +107,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         setBottomSheetMarginX(marginHorizontal);
         setIsBottomRadius(isBottomRadius);
         setBottomSheetBackgroundColor(backgroundColor);
+        setBottomSheetMaxHeight(maxHeight);
         bottomSheetRef.current?.handleVisible(true);
     };
 
@@ -152,6 +157,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
                 bottomSheetMarginX={bottomSheetMarginX}
                 isBottomRadius={isBottomRadius}
                 bottomSheetBackgroundColor={bottomSheetBackgroundColor}
+                maxHeight={bottomSheetMaxHeight}
             />
 
             <SnackbarNotify

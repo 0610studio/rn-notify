@@ -18,6 +18,7 @@ interface Props extends ViewProps {
   isHandleVisible: boolean;
   bottomSheetMarginX: number;
   isBottomRadius: boolean;
+  maxHeight: number;
 }
 
 const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
@@ -29,7 +30,8 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
   bottomSheetComponent,
   isHandleVisible,
   bottomSheetMarginX,
-  isBottomRadius
+  isBottomRadius,
+  maxHeight,
 }, ref) => {
   const {
     bottomSheetVisible,
@@ -52,7 +54,7 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
     closeOffset,
     contentsGestureEnable,
     bottomSheetMarginX,
-    isHandleVisible
+    isHandleVisible,
   });
 
   useImperativeHandle(ref, () => ({
@@ -107,6 +109,7 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
                       screenHeight={screenHeight}
                       bottomSheetComponent={bottomSheetComponent}
                       bottomSheetPadding={bottomSheetPadding}
+                      maxHeight={maxHeight}
                     />
                   </GestureDetector>
                 </Pressable>

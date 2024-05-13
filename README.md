@@ -58,17 +58,35 @@ showSnackBar({
 
 
 showBottomSheet({
-    isHandleVisible: false,
-    marginHorizontal: 0,
-    marginBottom: 0,
-    padding: 0,
-    isBottomRadius: false,
     component:
     <View style={{ padding: 50 }}>
         <View style={{ borderWidth: 1 }}>
             <BSTextInput />
         </View>
     </View>
+});
+
+// 스크롤 사용시
+showBottomSheet({
+    isHandleVisible: true,
+    marginHorizontal: 0,
+    marginBottom: 0,
+    padding: 0,
+    isBottomRadius: false,
+    maxHeight: 500,
+    contentsGestureEnable: false,
+    component:
+        <View style={{ width: '100%', paddingVertical: 30, backgroundColor: '#ff00ff' }}>
+            {
+                [...Array(11)].map((_, index) => {
+                    return (
+                        <View key={index} style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ paddingVertical: 30 }}>{index}</Text>
+                        </View>
+                    )
+                })
+            }
+        </View>
 });
 
 ```

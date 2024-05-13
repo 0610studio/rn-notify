@@ -47,14 +47,9 @@ var useBottomSheetNotify = function (_a) {
             { scale: bsScale.value }
         ],
     }); });
-    var initBottomSheet = useCallback(function () {
-        screenHeight.value = 1;
-        openPosition.value = 0;
-    }, []);
     var backPressHandler = useCallback(function () {
         if (bottomSheetVisible) {
             setBottomSheetVisible(false);
-            initBottomSheet();
             return true;
         }
         return false;
@@ -120,7 +115,6 @@ var useBottomSheetNotify = function (_a) {
             fullScreen.value = false;
             setTimeout(function () {
                 setBottomSheetVisible(false);
-                initBottomSheet();
             }, 200);
         }
     };

@@ -12,6 +12,7 @@ interface Props {
     screenHeight: SharedValue<number>;
     bottomSheetComponent: React.ReactNode;
     bottomSheetPadding: number;
+    maxHeight: number;
 }
 
 const ContentsComponent = ({
@@ -22,9 +23,9 @@ const ContentsComponent = ({
     correction,
     screenHeight,
     bottomSheetComponent,
-    bottomSheetPadding
+    bottomSheetPadding,
+    maxHeight
 }: Props) => {
-    const maxHeight = Dimensions.get('window').height - 120;
 
     const onLayout = (event: LayoutChangeEvent) => {
         let { height } = event.nativeEvent.layout;
@@ -48,6 +49,7 @@ const ContentsComponent = ({
             bounces={false}
             bouncesZoom={false}
             showsVerticalScrollIndicator={false}
+            scrollEventThrottle={16}
         >
             <View style={[{ width: '100%', minHeight: 1, paddingBottom: bottomSheetPadding }]} onLayout={onLayout}>
                 {bottomSheetComponent}

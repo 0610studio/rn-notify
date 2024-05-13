@@ -6,7 +6,7 @@ import useBottomSheetNotify from './model/useBottomSheetNotify';
 import ContentsComponent from './ui/ContentsComponent';
 var DEFAULT_BORDER_RADIUS = 24;
 var BottomSheetNotify = forwardRef(function (_a, ref) {
-    var marginBottomBS = _a.marginBottomBS, bottomSheetPadding = _a.bottomSheetPadding, bottomSheetBackgroundColor = _a.bottomSheetBackgroundColor, _b = _a.closeOffset, closeOffset = _b === void 0 ? Dimensions.get('window').height : _b, contentsGestureEnable = _a.contentsGestureEnable, bottomSheetComponent = _a.bottomSheetComponent, isHandleVisible = _a.isHandleVisible, bottomSheetMarginX = _a.bottomSheetMarginX, isBottomRadius = _a.isBottomRadius;
+    var marginBottomBS = _a.marginBottomBS, bottomSheetPadding = _a.bottomSheetPadding, _b = _a.closeOffset, closeOffset = _b === void 0 ? Dimensions.get('window').height : _b, contentsGestureEnable = _a.contentsGestureEnable, bottomSheetComponent = _a.bottomSheetComponent, isHandleVisible = _a.isHandleVisible, bottomSheetMarginX = _a.bottomSheetMarginX, isBottomRadius = _a.isBottomRadius;
     var _c = useBottomSheetNotify({
         marginBottomBS: marginBottomBS,
         bottomSheetPadding: bottomSheetPadding,
@@ -33,7 +33,6 @@ var BottomSheetNotify = forwardRef(function (_a, ref) {
                     borderTopRightRadius: DEFAULT_BORDER_RADIUS,
                     borderBottomLeftRadius: isBottomRadius ? DEFAULT_BORDER_RADIUS : 0,
                     borderBottomRightRadius: isBottomRadius ? DEFAULT_BORDER_RADIUS : 0,
-                    backgroundColor: bottomSheetBackgroundColor,
                 }, bsAnimatedStyle]}>
                 <Pressable onPress={function () {
                 Keyboard.dismiss();

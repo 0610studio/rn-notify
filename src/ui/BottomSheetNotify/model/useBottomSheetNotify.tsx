@@ -42,7 +42,7 @@ const useBottomSheetNotify = ({
     closeOffset,
     contentsGestureEnable,
     bottomSheetMarginX,
-    isHandleVisible
+    isHandleVisible,
 }: Props) => {
     const {
         bottomSheetVisible,
@@ -180,19 +180,29 @@ const useBottomSheetNotify = ({
         .onStart((event) => {
             'worklet';
             runOnJS(dismissKeyboard)();
-            bsScale.value = withTiming(0.98, timingConfig100);
+            
             // 제스쳐 영역
             if ((openPosition.value + handleHeight + correction) > event.absoluteY) {
                 gestureComponent.value = 'Handler';
+                bsScale.value = withTiming(0.98, timingConfig100);
+
             } else {
                 gestureComponent.value = 'Contents';
+                if (contentsGestureEnable)
+                    bsScale.value = withTiming(0.98, timingConfig100);
             }
         })
         .onUpdate((event) => {
             'worklet';
+            // 제스쳐 제어
+            if (!contentsGestureEnable && gestureComponent.value === 'Contents') return;
+
             const translateXValue = event.translationX;
             const translateYValue = event.translationY;
             const calcBg = Math.round(DEFAULT_BG_OPACITY + (translateYValue * -1));
+
+            // TODO: list가 상단에 닿으면 BottomSheet 동작.
+            // if (gestureComponent.value === 'Contents' && fullScreen.value && listScrollPosition.value > 10) return;
 
             // 백그라운드 컬러
             if (calcBg < 70 && calcBg > DEFAULT_BG_OPACITY) {
@@ -204,13 +214,9 @@ const useBottomSheetNotify = ({
                 translateX.value = translateXValue;
             };
 
-            // 제스쳐 제어
-            if (!contentsGestureEnable && gestureComponent.value === 'Contents') return;
             if (fullScreen.value && translateYValue < NATURAL_GESTURE_TOP) return;
             if (!fullScreen.value && translateYValue > 0 && translateY.value === closeOffset) return;
 
-            // TODO: list가 상단에 닿으면 BottomSheet 동작.
-            // if (gestureComponent.value === 'Contents' && fullScreen.value && listScrollPosition.value > 10) return;
 
             const result = translateYValue + (fullScreen.value ? openPosition.value : (30));
             translateY.value = result;

@@ -11,18 +11,16 @@ export interface NotifyProps {
     setBottomSheetVisible: (visible: boolean) => void;
     showAlert: (props: ShowAlertProps) => void;
     showSnackBar: (props: ShowSnackBarProps) => void;
-    showBottomSheet: (props: ShowBottomSheetProps) => void;
+    showBottomSheet: (props: {
+        isBottomRadius?: boolean;
+        marginHorizontal?: number;
+        isHandleVisible?: boolean;
+        marginBottom?: number;
+        padding?: number;
+        component: React.ReactNode;
+        contentsGestureEnable?: boolean;
+    }) => void;
     hideNotify: (option: HideOption) => void;
-}
-export interface ShowBottomSheetProps {
-    backgroundColor?: string;
-    isBottomRadius?: boolean;
-    marginHorizontal?: number;
-    isHandleVisible?: boolean;
-    marginBottom?: number;
-    padding?: number;
-    component: React.ReactNode;
-    contentsGestureEnable?: boolean;
 }
 export interface CustomSnackbarProps {
     snackType: SnackType;

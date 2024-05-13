@@ -4,7 +4,6 @@ import { BottomSheetNotifyRef } from './types';
 interface Props extends ViewProps {
     marginBottomBS: number;
     bottomSheetPadding: number;
-    bottomSheetBackgroundColor: string;
     closeOffset?: number;
     contentsGestureEnable: boolean;
     bottomSheetComponent: React.ReactNode;
