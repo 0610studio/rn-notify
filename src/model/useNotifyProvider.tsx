@@ -47,6 +47,8 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
     const [marginBottomBS, setMarginBottomBs] = useState<number>(0);
     const bottomSheetRef = useRef<BottomSheetRef | null>(null);
 
+    const [fontFamily, setFontFamily] = useState<string | undefined>(undefined);
+
 
     const showAlert = ({
         title,
@@ -59,7 +61,8 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         primaryButtonStyle,
         secondaryButtonTextStyle,
         primaryButtonTextStyle,
-        singleButtonTextStyle
+        singleButtonTextStyle,
+        fontFamily
     }: ShowAlertProps) => {
         Keyboard.dismiss();
         setTitle(title);
@@ -75,6 +78,8 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         setSecondaryButtonTextStyle(secondaryButtonTextStyle);
         setPrimaryButtonTextStyle(primaryButtonTextStyle);
         setSingleButtonTextStyle(singleButtonTextStyle);
+
+        setFontFamily(fontFamily);
     };
 
     const showSnackBar = ({
@@ -176,6 +181,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
                 secondaryButtonTextStyle={secondaryButtonTextStyle}
                 primaryButtonTextStyle={primaryButtonTextStyle}
                 singleButtonTextStyle={singleButtonTextStyle}
+                fontFamily={fontFamily}
             />
         </NotifyContext.Provider>
     );

@@ -59,6 +59,7 @@ export interface ShowAlertProps {
     secondaryButtonTextStyle?: TextProps['style'];
     primaryButtonTextStyle?: TextProps['style'];
     singleButtonTextStyle?: TextProps['style'];
+    fontFamily?: string;
 }
 
 export interface AlertActions {

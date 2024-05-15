@@ -40,8 +40,9 @@ export var NotifyProvider = function (_a) {
     var _0 = useState(true), handleVisible = _0[0], setHandleVisible = _0[1];
     var _1 = useState(0), marginBottomBS = _1[0], setMarginBottomBs = _1[1];
     var bottomSheetRef = useRef(null);
+    var _2 = useState(undefined), fontFamily = _2[0], setFontFamily = _2[1];
     var showAlert = function (_a) {
-        var title = _a.title, informative = _a.informative, actions = _a.actions, _b = _a.isBackgroundTouchClose, isBackgroundTouchClose = _b === void 0 ? true : _b, titleStyle = _a.titleStyle, informativeStyle = _a.informativeStyle, secondaryButtonStyle = _a.secondaryButtonStyle, primaryButtonStyle = _a.primaryButtonStyle, secondaryButtonTextStyle = _a.secondaryButtonTextStyle, primaryButtonTextStyle = _a.primaryButtonTextStyle, singleButtonTextStyle = _a.singleButtonTextStyle;
+        var title = _a.title, informative = _a.informative, actions = _a.actions, _b = _a.isBackgroundTouchClose, isBackgroundTouchClose = _b === void 0 ? true : _b, titleStyle = _a.titleStyle, informativeStyle = _a.informativeStyle, secondaryButtonStyle = _a.secondaryButtonStyle, primaryButtonStyle = _a.primaryButtonStyle, secondaryButtonTextStyle = _a.secondaryButtonTextStyle, primaryButtonTextStyle = _a.primaryButtonTextStyle, singleButtonTextStyle = _a.singleButtonTextStyle, fontFamily = _a.fontFamily;
         Keyboard.dismiss();
         setTitle(title);
         setInformative(informative);
@@ -55,6 +56,7 @@ export var NotifyProvider = function (_a) {
         setSecondaryButtonTextStyle(secondaryButtonTextStyle);
         setPrimaryButtonTextStyle(primaryButtonTextStyle);
         setSingleButtonTextStyle(singleButtonTextStyle);
+        setFontFamily(fontFamily);
     };
     var showSnackBar = function (_a) {
         var message = _a.message, _b = _a.type, type = _b === void 0 ? 'success' : _b;
@@ -114,7 +116,7 @@ export var NotifyProvider = function (_a) {
 
             <SnackbarNotify customSnackbar={customSnackbar}/>
 
-            <AlertNotify title={title} informative={informative} actions={actions || {}} isBackgroundTouchClose={isBackgroundTouchClose} titleStyle={titleStyle} informativeStyle={informativeStyle} secondaryButtonStyle={secondaryButtonStyle} primaryButtonStyle={primaryButtonStyle} secondaryButtonTextStyle={secondaryButtonTextStyle} primaryButtonTextStyle={primaryButtonTextStyle} singleButtonTextStyle={singleButtonTextStyle}/>
+            <AlertNotify title={title} informative={informative} actions={actions || {}} isBackgroundTouchClose={isBackgroundTouchClose} titleStyle={titleStyle} informativeStyle={informativeStyle} secondaryButtonStyle={secondaryButtonStyle} primaryButtonStyle={primaryButtonStyle} secondaryButtonTextStyle={secondaryButtonTextStyle} primaryButtonTextStyle={primaryButtonTextStyle} singleButtonTextStyle={singleButtonTextStyle} fontFamily={fontFamily}/>
         </NotifyContext.Provider>);
 };
 //# sourceMappingURL=useNotifyProvider.js.map
