@@ -54,7 +54,6 @@ var useBottomSheetNotify = function (_a) {
     var backPressHandler = useCallback(function () {
         if (bottomSheetVisible) {
             setBottomSheetVisible(false);
-            initBottomSheet();
             return true;
         }
         return false;
@@ -63,6 +62,10 @@ var useBottomSheetNotify = function (_a) {
         var backHandler = BackHandler.addEventListener('hardwareBackPress', backPressHandler);
         return function () { return backHandler.remove(); };
     }, [backPressHandler]);
+    useEffect(function () {
+        if (!bottomSheetVisible)
+            initBottomSheet();
+    }, [bottomSheetVisible]);
     var backgroundPressHandler = function () {
         if (isKeyboardVisible) {
             Keyboard.dismiss();
@@ -120,7 +123,6 @@ var useBottomSheetNotify = function (_a) {
             fullScreen.value = false;
             setTimeout(function () {
                 setBottomSheetVisible(false);
-                initBottomSheet();
             }, 200);
         }
     };

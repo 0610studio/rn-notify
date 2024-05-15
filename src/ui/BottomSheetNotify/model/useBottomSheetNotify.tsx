@@ -88,7 +88,6 @@ const useBottomSheetNotify = ({
     const backPressHandler = useCallback(() => {
         if (bottomSheetVisible) {
             setBottomSheetVisible(false);
-            initBottomSheet();
             return true;
         }
         return false;
@@ -99,6 +98,12 @@ const useBottomSheetNotify = ({
 
         return () => backHandler.remove();
     }, [backPressHandler]);
+
+    
+    useEffect(() => {
+        if (!bottomSheetVisible)
+            initBottomSheet();
+    }, [bottomSheetVisible]);
 
 
     const backgroundPressHandler = () => {
@@ -165,7 +170,6 @@ const useBottomSheetNotify = ({
             fullScreen.value = false;
             setTimeout(() => {
                 setBottomSheetVisible(false);
-                initBottomSheet();
             }, 200);
         }
     }
@@ -180,7 +184,7 @@ const useBottomSheetNotify = ({
         .onStart((event) => {
             'worklet';
             runOnJS(dismissKeyboard)();
-            
+
             // 제스쳐 영역
             if ((openPosition.value + handleHeight + correction) > event.absoluteY) {
                 gestureComponent.value = 'Handler';
