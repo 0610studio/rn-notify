@@ -99,7 +99,7 @@ const useBottomSheetNotify = ({
         return () => backHandler.remove();
     }, [backPressHandler]);
 
-    
+
     useEffect(() => {
         if (!bottomSheetVisible)
             initBottomSheet();
@@ -139,9 +139,9 @@ const useBottomSheetNotify = ({
 
         const keyboardDidHideListener = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => {
             setIsKeyboardVisible(false);
-
+            
             // 키보드가 사라질 때 화면의 높이를 원래대로 돌립니다.
-            if (!fullScreen.value) return;
+            if (!fullScreen.value || !bottomSheetVisible) return;
             handleVisible(true);
         });
 
