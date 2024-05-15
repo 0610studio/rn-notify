@@ -10,7 +10,8 @@ interface Props {
     screenHeight: SharedValue<number>;
     bottomSheetComponent: React.ReactNode;
     bottomSheetPadding: number;
+    maxHeight: number;
 }
-declare const ContentsComponent: ({ panGestureRef, listScrollPosition, handleHeight, openPosition, correction, screenHeight, bottomSheetComponent, bottomSheetPadding }: Props) => import("react").JSX.Element;
+declare const ContentsComponent: ({ panGestureRef, listScrollPosition, handleHeight, openPosition, correction, screenHeight, bottomSheetComponent, bottomSheetPadding, maxHeight }: Props) => import("react").JSX.Element;
 export default ContentsComponent;
 //# sourceMappingURL=index.d.ts.map

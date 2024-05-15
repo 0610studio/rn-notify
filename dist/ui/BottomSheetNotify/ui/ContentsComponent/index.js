@@ -2,8 +2,7 @@ import { useCallback } from "react";
 import { Dimensions, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 var ContentsComponent = function (_a) {
-    var panGestureRef = _a.panGestureRef, listScrollPosition = _a.listScrollPosition, handleHeight = _a.handleHeight, openPosition = _a.openPosition, correction = _a.correction, screenHeight = _a.screenHeight, bottomSheetComponent = _a.bottomSheetComponent, bottomSheetPadding = _a.bottomSheetPadding;
-    var maxHeight = Dimensions.get('window').height - 120;
+    var panGestureRef = _a.panGestureRef, listScrollPosition = _a.listScrollPosition, handleHeight = _a.handleHeight, openPosition = _a.openPosition, correction = _a.correction, screenHeight = _a.screenHeight, bottomSheetComponent = _a.bottomSheetComponent, bottomSheetPadding = _a.bottomSheetPadding, maxHeight = _a.maxHeight;
     var onLayout = function (event) {
         var height = event.nativeEvent.layout.height;
         height = height > maxHeight ? maxHeight : height;
@@ -13,7 +12,7 @@ var ContentsComponent = function (_a) {
     var handleScroll = useCallback(function (event) {
         listScrollPosition.value = event.nativeEvent.contentOffset.y;
     }, [listScrollPosition]);
-    return (<ScrollView simultaneousHandlers={[panGestureRef]} onScroll={handleScroll} style={{ maxHeight: maxHeight }} keyboardShouldPersistTaps="handled" bounces={false} bouncesZoom={false} showsVerticalScrollIndicator={false}>
+    return (<ScrollView simultaneousHandlers={[panGestureRef]} onScroll={handleScroll} style={{ maxHeight: maxHeight }} keyboardShouldPersistTaps="handled" bounces={false} bouncesZoom={false} showsVerticalScrollIndicator={false} scrollEventThrottle={16}>
             <View style={[{ width: '100%', minHeight: 1, paddingBottom: bottomSheetPadding }]} onLayout={onLayout}>
                 {bottomSheetComponent}
             </View>

@@ -1,8 +1,9 @@
 import { createContext, useContext, useRef, useState } from 'react';
-import { Keyboard } from 'react-native';
+import { Dimensions, Keyboard } from 'react-native';
 import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
 import BottomSheetNotify from '../ui/BottomSheetNotify';
+var BS_MAX_HEIGHT = Dimensions.get('window').height - 120;
 var NotifyContext = createContext(null);
 export var useNotify = function () {
     var context = useContext(NotifyContext);
@@ -30,12 +31,14 @@ export var NotifyProvider = function (_a) {
     var _r = useState(''), snackType = _r[0], setSnackType = _r[1];
     var _s = useState(false), contentsGestureEnable = _s[0], setContentsGestureEnable = _s[1];
     var _t = useState(false), bottomSheetVisible = _t[0], setBottomSheetVisible = _t[1];
-    var _u = useState(false), bottomSheetComponent = _u[0], setBottomSheetComponent = _u[1];
-    var _v = useState(0), bottomSheetPadding = _v[0], setBottomSheetPadding = _v[1];
-    var _w = useState(0), bottomSheetMarginX = _w[0], setBottomSheetMarginX = _w[1];
-    var _x = useState(true), isBottomRadius = _x[0], setIsBottomRadius = _x[1];
-    var _y = useState(true), handleVisible = _y[0], setHandleVisible = _y[1];
-    var _z = useState(0), marginBottomBS = _z[0], setMarginBottomBs = _z[1];
+    var _u = useState('#ffffff'), bottomSheetBackgroundColor = _u[0], setBottomSheetBackgroundColor = _u[1];
+    var _v = useState(false), bottomSheetComponent = _v[0], setBottomSheetComponent = _v[1];
+    var _w = useState(0), bottomSheetPadding = _w[0], setBottomSheetPadding = _w[1];
+    var _x = useState(0), bottomSheetMarginX = _x[0], setBottomSheetMarginX = _x[1];
+    var _y = useState(BS_MAX_HEIGHT), bottomSheetMaxHeight = _y[0], setBottomSheetMaxHeight = _y[1];
+    var _z = useState(true), isBottomRadius = _z[0], setIsBottomRadius = _z[1];
+    var _0 = useState(true), handleVisible = _0[0], setHandleVisible = _0[1];
+    var _1 = useState(0), marginBottomBS = _1[0], setMarginBottomBs = _1[1];
     var bottomSheetRef = useRef(null);
     var showAlert = function (_a) {
         var title = _a.title, informative = _a.informative, actions = _a.actions, _b = _a.isBackgroundTouchClose, isBackgroundTouchClose = _b === void 0 ? true : _b, titleStyle = _a.titleStyle, informativeStyle = _a.informativeStyle, secondaryButtonStyle = _a.secondaryButtonStyle, primaryButtonStyle = _a.primaryButtonStyle, secondaryButtonTextStyle = _a.secondaryButtonTextStyle, primaryButtonTextStyle = _a.primaryButtonTextStyle, singleButtonTextStyle = _a.singleButtonTextStyle;
@@ -62,7 +65,7 @@ export var NotifyProvider = function (_a) {
     };
     var showBottomSheet = function (_a) {
         var _b;
-        var _c = _a.isHandleVisible, isHandleVisible = _c === void 0 ? true : _c, component = _a.component, _d = _a.contentsGestureEnable, contentsGestureEnable = _d === void 0 ? true : _d, _e = _a.marginHorizontal, marginHorizontal = _e === void 0 ? 20 : _e, _f = _a.padding, padding = _f === void 0 ? 20 : _f, _g = _a.marginBottom, marginBottom = _g === void 0 ? 10 : _g, _h = _a.isBottomRadius, isBottomRadius = _h === void 0 ? true : _h;
+        var _c = _a.isHandleVisible, isHandleVisible = _c === void 0 ? true : _c, component = _a.component, _d = _a.contentsGestureEnable, contentsGestureEnable = _d === void 0 ? true : _d, _e = _a.marginHorizontal, marginHorizontal = _e === void 0 ? 10 : _e, _f = _a.padding, padding = _f === void 0 ? 20 : _f, _g = _a.marginBottom, marginBottom = _g === void 0 ? 10 : _g, _h = _a.backgroundColor, backgroundColor = _h === void 0 ? '#ffffff' : _h, _j = _a.isBottomRadius, isBottomRadius = _j === void 0 ? true : _j, _k = _a.maxHeight, maxHeight = _k === void 0 ? BS_MAX_HEIGHT : _k;
         Keyboard.dismiss();
         setHandleVisible(isHandleVisible);
         setBottomSheetPadding(padding);
@@ -71,6 +74,8 @@ export var NotifyProvider = function (_a) {
         setMarginBottomBs(marginBottom);
         setBottomSheetMarginX(marginHorizontal);
         setIsBottomRadius(isBottomRadius);
+        setBottomSheetBackgroundColor(backgroundColor);
+        setBottomSheetMaxHeight(maxHeight);
         (_b = bottomSheetRef.current) === null || _b === void 0 ? void 0 : _b.handleVisible(true);
     };
     var hideNotify = function (option) {
@@ -105,7 +110,7 @@ export var NotifyProvider = function (_a) {
         }}>
             {children}
 
-            <BottomSheetNotify ref={bottomSheetRef} contentsGestureEnable={contentsGestureEnable} bottomSheetComponent={bottomSheetComponent} bottomSheetPadding={bottomSheetPadding} marginBottomBS={marginBottomBS} isHandleVisible={handleVisible} bottomSheetMarginX={bottomSheetMarginX} isBottomRadius={isBottomRadius}/>
+            <BottomSheetNotify ref={bottomSheetRef} contentsGestureEnable={contentsGestureEnable} bottomSheetComponent={bottomSheetComponent} bottomSheetPadding={bottomSheetPadding} marginBottomBS={marginBottomBS} isHandleVisible={handleVisible} bottomSheetMarginX={bottomSheetMarginX} isBottomRadius={isBottomRadius} bottomSheetBackgroundColor={bottomSheetBackgroundColor} maxHeight={bottomSheetMaxHeight}/>
 
             <SnackbarNotify customSnackbar={customSnackbar}/>
 

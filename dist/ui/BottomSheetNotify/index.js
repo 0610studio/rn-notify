@@ -6,14 +6,14 @@ import useBottomSheetNotify from './model/useBottomSheetNotify';
 import ContentsComponent from './ui/ContentsComponent';
 var DEFAULT_BORDER_RADIUS = 24;
 var BottomSheetNotify = forwardRef(function (_a, ref) {
-    var marginBottomBS = _a.marginBottomBS, bottomSheetPadding = _a.bottomSheetPadding, bottomSheetBackgroundColor = _a.bottomSheetBackgroundColor, _b = _a.closeOffset, closeOffset = _b === void 0 ? Dimensions.get('window').height : _b, contentsGestureEnable = _a.contentsGestureEnable, bottomSheetComponent = _a.bottomSheetComponent, isHandleVisible = _a.isHandleVisible, bottomSheetMarginX = _a.bottomSheetMarginX, isBottomRadius = _a.isBottomRadius;
+    var marginBottomBS = _a.marginBottomBS, bottomSheetPadding = _a.bottomSheetPadding, bottomSheetBackgroundColor = _a.bottomSheetBackgroundColor, _b = _a.closeOffset, closeOffset = _b === void 0 ? Dimensions.get('window').height : _b, contentsGestureEnable = _a.contentsGestureEnable, bottomSheetComponent = _a.bottomSheetComponent, isHandleVisible = _a.isHandleVisible, bottomSheetMarginX = _a.bottomSheetMarginX, isBottomRadius = _a.isBottomRadius, maxHeight = _a.maxHeight;
     var _c = useBottomSheetNotify({
         marginBottomBS: marginBottomBS,
         bottomSheetPadding: bottomSheetPadding,
         closeOffset: closeOffset,
         contentsGestureEnable: contentsGestureEnable,
         bottomSheetMarginX: bottomSheetMarginX,
-        isHandleVisible: isHandleVisible
+        isHandleVisible: isHandleVisible,
     }), bottomSheetVisible = _c.bottomSheetVisible, bsAnimatedStyle = _c.bsAnimatedStyle, onGestureEvent = _c.onGestureEvent, handleVisible = _c.handleVisible, onTapEvent = _c.onTapEvent, handleHeight = _c.handleHeight, openPosition = _c.openPosition, correction = _c.correction, screenWidth = _c.screenWidth, screenHeight = _c.screenHeight, panGestureRef = _c.panGestureRef, listScrollPosition = _c.listScrollPosition, bsModalBgStyle = _c.bsModalBgStyle, backgroundPressHandler = _c.backgroundPressHandler;
     useImperativeHandle(ref, function () { return ({
         handleVisible: handleVisible,
@@ -44,7 +44,7 @@ var BottomSheetNotify = forwardRef(function (_a, ref) {
                     </View>}
 
                   <GestureDetector gesture={onTapEvent}>
-                    <ContentsComponent panGestureRef={panGestureRef} listScrollPosition={listScrollPosition} handleHeight={handleHeight} openPosition={openPosition} correction={correction} screenHeight={screenHeight} bottomSheetComponent={bottomSheetComponent} bottomSheetPadding={bottomSheetPadding}/>
+                    <ContentsComponent panGestureRef={panGestureRef} listScrollPosition={listScrollPosition} handleHeight={handleHeight} openPosition={openPosition} correction={correction} screenHeight={screenHeight} bottomSheetComponent={bottomSheetComponent} bottomSheetPadding={bottomSheetPadding} maxHeight={maxHeight}/>
                   </GestureDetector>
                 </Pressable>
               </Animated.View>

@@ -11,6 +11,7 @@ interface Props extends ViewProps {
     isHandleVisible: boolean;
     bottomSheetMarginX: number;
     isBottomRadius: boolean;
+    maxHeight: number;
 }
 declare const BottomSheetNotify: import("react").ForwardRefExoticComponent<Props & import("react").RefAttributes<BottomSheetNotifyRef>>;
 export default BottomSheetNotify;

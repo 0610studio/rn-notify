@@ -8,7 +8,7 @@ interface Props {
     isHandleVisible: boolean;
     bottomSheetMarginX: number;
 }
-declare const useBottomSheetNotify: ({ marginBottomBS, bottomSheetPadding, closeOffset, contentsGestureEnable, bottomSheetMarginX, isHandleVisible }: Props) => {
+declare const useBottomSheetNotify: ({ marginBottomBS, bottomSheetPadding, closeOffset, contentsGestureEnable, bottomSheetMarginX, isHandleVisible, }: Props) => {
     bottomSheetVisible: boolean;
     bsAnimatedStyle: {
         transform: ({

@@ -1,6 +1,6 @@
 {
   "name": "@0610studio/rn-notify",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "private": false,
   "description": "",
   "main": "dist/index.js",
@@ -11,24 +11,23 @@
     "start": "cd Example && react-native start",
     "android": "cd Example && react-native run-android",
     "ios": "cd Example && react-native run-ios",
-    "build:npm": "rm -rf dist && tsc && rm -rf Example/dist && tsc -w --outDir Example/dist",
-    "publish:npm": "npm publish --access public"
+    "build:tsc": "rm -rf dist && rm -rf Example/dist && tsc && cp -R src/assets dist/assets && cp -R dist Example/dist",
+    "publish:npm": "npm publish --access public",
+    "clean": "rm -rf dist && rm -rf Example/dist && rm -rf Example/ios/Pods && rm -rf Example/ios/Podfile.lock && rm -rf Example/ios/build && rm -rf Example/android/app/build && rm -rf node_modules && rm -rf Example/node_modules && rm -rf yarn.lock && rm -rf Example/yarn.lock",
+    "postinstall": "cd Example && yarn install && cd ios && pod install"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0",
+    "react-native-reanimated": ">=3.8.1",
+    "react-native-safe-area-context": ">=^4.0.0"
+  },
+  "devDependencies": {
     "react": "18.2.0",
     "react-native": "0.73.8",
     "react-native-gesture-handler": "^2.16.0",
     "react-native-reanimated": "^3.8.1",
-    "react-native-safe-area-context": "^4.9.0"
-  },
-  "peerDependencies": {
-    "react": "*",
-    "react-native": "*",
-    "react-native-gesture-handler": "*",
-    "react-native-reanimated": "*",
-    "react-native-safe-area-context": "*"
-  },
-  "devDependencies": {
+    "react-native-safe-area-context": "^4.9.0",
     "babel-plugin-module-resolver": "5.0.0",
     "@react-native/babel-preset": "*",
     "@react-native/metro-config": "*",
@@ -44,8 +43,6 @@
     "husky": "4.2.3",
     "lint-staged": "10.0.9",
     "prettier": "2.0.2",
-    "react": "*",
-    "react-native": "*",
     "typescript": "5.0.4"
   },
   "repository": {

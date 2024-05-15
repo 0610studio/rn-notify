@@ -47,9 +47,14 @@ var useBottomSheetNotify = function (_a) {
             { scale: bsScale.value }
         ],
     }); });
+    var initBottomSheet = useCallback(function () {
+        screenHeight.value = 1;
+        openPosition.value = 0;
+    }, []);
     var backPressHandler = useCallback(function () {
         if (bottomSheetVisible) {
             setBottomSheetVisible(false);
+            initBottomSheet();
             return true;
         }
         return false;
@@ -115,6 +120,7 @@ var useBottomSheetNotify = function (_a) {
             fullScreen.value = false;
             setTimeout(function () {
                 setBottomSheetVisible(false);
+                initBottomSheet();
             }, 200);
         }
     };
@@ -126,16 +132,20 @@ var useBottomSheetNotify = function (_a) {
         .onStart(function (event) {
         'worklet';
         runOnJS(dismissKeyboard)();
-        bsScale.value = withTiming(0.98, timingConfig100);
         if ((openPosition.value + handleHeight + correction) > event.absoluteY) {
             gestureComponent.value = 'Handler';
+            bsScale.value = withTiming(0.98, timingConfig100);
         }
         else {
             gestureComponent.value = 'Contents';
+            if (contentsGestureEnable)
+                bsScale.value = withTiming(0.98, timingConfig100);
         }
     })
         .onUpdate(function (event) {
         'worklet';
+        if (!contentsGestureEnable && gestureComponent.value === 'Contents')
+            return;
         var translateXValue = event.translationX;
         var translateYValue = event.translationY;
         var calcBg = Math.round(DEFAULT_BG_OPACITY + (translateYValue * -1));
@@ -147,8 +157,6 @@ var useBottomSheetNotify = function (_a) {
             translateX.value = translateXValue;
         }
         ;
-        if (!contentsGestureEnable && gestureComponent.value === 'Contents')
-            return;
         if (fullScreen.value && translateYValue < NATURAL_GESTURE_TOP)
             return;
         if (!fullScreen.value && translateYValue > 0 && translateY.value === closeOffset)

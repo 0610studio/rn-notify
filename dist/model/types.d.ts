@@ -23,6 +23,7 @@ export interface ShowBottomSheetProps {
     padding?: number;
     component: React.ReactNode;
     contentsGestureEnable?: boolean;
+    maxHeight?: number;
 }
 export interface CustomSnackbarProps {
     snackType: SnackType;
