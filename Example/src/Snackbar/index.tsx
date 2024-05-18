@@ -3,7 +3,7 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from "react
 const SnackBar = ({ snackType, snackMessage }: any) => {
     return (
         <TouchableOpacity activeOpacity={1} onPress={() => { }}
-            style={[styles.snackbar, { borderColor: snackType === 'error' ? '#f7cdcd' : '#c6e4c9', backgroundColor: snackType === 'error' ? '#fae6e6' : '#eef7ef' }]}>
+            style={[styles.snackbar, { backgroundColor: snackType === 'error' ? '#fae6e6' : '#eef7ef' }]}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 {
                     snackType === 'success' ? (
@@ -23,15 +23,11 @@ const SnackBar = ({ snackType, snackMessage }: any) => {
 
 const styles = StyleSheet.create({
     snackbar: {
-        width: '90%',
-        borderRadius: 14,
-        borderWidth: 1,
-        paddingHorizontal: 10,
-        paddingVertical: 12,
-        ...Platform.select({
-            ios: { shadowColor: "rgb(50, 50, 50)", shadowOpacity: 0.1, shadowRadius: 3, shadowOffset: { height: 1, width: 1 } },
-            android: { elevation: 5 }
-        })
+        width: '100%',
+        borderRadius: 0,
+        paddingHorizontal: 15,
+        paddingVertical: 16,
+        backgroundColor: '#ffffff',
     }
 });
 

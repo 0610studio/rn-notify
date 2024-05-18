@@ -1,9 +1,10 @@
-import { createContext, useContext, useRef, useState } from 'react';
+import { createContext, useCallback, useContext, useRef, useState } from 'react';
 import { Dimensions, Keyboard, TextProps, TouchableOpacityProps } from 'react-native';
-import { AlertActions, BottomSheetRef, HideOption, NotifyProps, NotifyProviderProps, ShowAlertProps, ShowBottomSheetProps, ShowSnackBarProps, SnackType } from './types';
+import { AlertActions, BottomSheetRef, HideOption, NotifyProps, NotifyProviderProps, ShowAlertProps, ShowBottomSheetProps, ShowSnackBarProps, SnackItem } from './types';
 import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
 import BottomSheetNotify from '../ui/BottomSheetNotify';
+import LoadingNotify from '../ui/LoadingNotify';
 
 const BS_MAX_HEIGHT = Dimensions.get('window').height - 120;
 
@@ -17,7 +18,12 @@ export const useNotify = () => {
     return context;
 }
 
-export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, children }) => {
+export const NotifyProvider: React.FC<NotifyProviderProps> = ({
+    customSnackbar,
+    loaderComponent,
+    children
+}) => {
+    // Alert
     const [title, setTitle] = useState<string>('');
     const [informative, setInformative] = useState<string>('');
     const [alertVisible, setAlertVisible] = useState<boolean>(false);
@@ -31,10 +37,10 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
     const [primaryButtonTextStyle, setPrimaryButtonTextStyle] = useState<TextProps['style']>();
     const [singleButtonTextStyle, setSingleButtonTextStyle] = useState<TextProps['style']>();
 
-    const [snackVisible, setSnackVisible] = useState<boolean>(false);
-    const [snackMessage, setSnackMessage] = useState<string>('');
-    const [snackType, setSnackType] = useState<SnackType>('');
+    // Snackbar
+    const [snackItemStack, setSnackItemStack] = useState<SnackItem[]>([]);
 
+    // BottomSheet
     const [contentsGestureEnable, setContentsGestureEnable] = useState<boolean>(false);
     const [bottomSheetVisible, setBottomSheetVisible] = useState<boolean>(false);
     const [bottomSheetBackgroundColor, setBottomSheetBackgroundColor] = useState<string>('#ffffff');
@@ -47,6 +53,10 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
     const [marginBottomBS, setMarginBottomBs] = useState<number>(0);
     const bottomSheetRef = useRef<BottomSheetRef | null>(null);
 
+    // Loading
+    const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
+
+    // ---
     const [fontFamily, setFontFamily] = useState<string | undefined>(undefined);
 
 
@@ -82,16 +92,6 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         setFontFamily(fontFamily);
     };
 
-    const showSnackBar = ({
-        message,
-        type = 'success'
-    }: ShowSnackBarProps) => {
-        Keyboard.dismiss();
-        setSnackMessage(message);
-        setSnackType(type);
-        setSnackVisible(true);
-    };
-
     const showBottomSheet = ({
         isHandleVisible = true,
         component,
@@ -116,19 +116,54 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
         bottomSheetRef.current?.handleVisible(true);
     };
 
-    const hideNotify = (option: HideOption) => {
-        if (option === 'all') {
-            setAlertVisible(false);
-            setSnackVisible(false);
-            setBottomSheetVisible(false);
-        } else if (option === 'alert') {
-            setAlertVisible(false);
-        } else if (option === 'snack') {
-            setSnackVisible(false);
-        } else if (option === 'bottomSheet') {
-            setBottomSheetVisible(false);
-        }
+    const showLoader = () => {
+        setLoaderVisible(true);
     };
+
+    const showSnackBar = ({
+        message,
+        type = 'success',
+        index = Date.now(),
+        snackbarDuration = 3000
+    }: ShowSnackBarProps) => {
+        // TODO: 스택 쌓고싶은데 삭제될 때 참조를 잃어서 삭제가 안되는 문제가 있음.
+        setSnackItemStack((prev) => {
+            if (prev.length === 0) {
+                return [...prev, { message, type, index: index, snackbarDuration: snackbarDuration }];
+            } else {
+                return prev;
+            };
+        });
+    };
+
+    const hideSnackBar = (index: number) => {
+        setSnackItemStack((prev) => prev.filter((item) => item.index !== index));
+    };
+
+    const hideNotify = useCallback((option: HideOption) => {
+        switch (option) {
+            case 'alert':
+                setAlertVisible(false);
+                break;
+            case 'snack':
+                setSnackItemStack([]);
+                break;
+            case 'bottomSheet':
+                setBottomSheetVisible(false);
+                break;
+            case 'loader':
+                setLoaderVisible(false);
+                break;
+            case 'all':
+                setAlertVisible(false);
+                setSnackItemStack([]);
+                setBottomSheetVisible(false);
+                setLoaderVisible(false);
+                break;
+            default:
+                break;
+        };
+    }, []);
 
 
     return (
@@ -136,17 +171,18 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
             alertVisible,
             setAlertVisible,
             // ---
-            snackVisible,
-            snackMessage,
-            snackType,
-            setSnackVisible,
+            snackItemStack,
+            hideSnackBar,
             // ---
             bottomSheetVisible,
             setBottomSheetVisible,
             // ---
+            loaderVisible,
+            // ---
             showAlert,
             showSnackBar,
             showBottomSheet,
+            showLoader,
             // ---
             hideNotify,
         }}>
@@ -182,6 +218,10 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({ customSnackbar, 
                 primaryButtonTextStyle={primaryButtonTextStyle}
                 singleButtonTextStyle={singleButtonTextStyle}
                 fontFamily={fontFamily}
+            />
+
+            <LoadingNotify
+                loaderComponent={loaderComponent}
             />
         </NotifyContext.Provider>
     );

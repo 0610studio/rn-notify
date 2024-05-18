@@ -64,7 +64,7 @@ var styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#212B3699',
-        zIndex: 9999,
+        zIndex: 9998,
     },
     title: {
         color: '#232323',
