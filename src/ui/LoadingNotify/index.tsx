@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#212B3699',
+        backgroundColor: '#212B3688',
         zIndex: 9999,
     }
 });

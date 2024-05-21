@@ -1,0 +1,33 @@
+import { Dimensions, Pressable, StyleSheet } from "react-native";
+import { useNotify } from "../../model/useNotifyProvider";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+var PopOverMenu = function (_a) {
+    var px = _a.px, py = _a.py, component = _a.component;
+    var _b = useNotify(), popOverVisible = _b.popOverVisible, setPopOverVisible = _b.setPopOverVisible;
+    console.log('PopOverMenu 22');
+    console.log('----- px : ', px);
+    console.log('----- py : ', py);
+    return (popOverVisible ?
+        <Animated.View style={styles.modalBg} entering={FadeIn} exiting={FadeOut}>
+                <Pressable style={{ width: '100%', height: '100%' }} onPress={function () { setPopOverVisible(false); }}>
+                    <Pressable style={{ position: 'absolute', top: py, left: px }}>
+                        {component}
+                    </Pressable>
+                </Pressable>
+            </Animated.View>
+        : null);
+};
+var styles = StyleSheet.create({
+    modalBg: {
+        flex: 1,
+        position: 'absolute',
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#212B3688',
+        zIndex: 9997,
+    }
+});
+export default PopOverMenu;
+//# sourceMappingURL=PopOverMenu.js.map

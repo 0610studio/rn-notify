@@ -13,6 +13,7 @@ import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
 import BottomSheetNotify from '../ui/BottomSheetNotify';
 import LoadingNotify from '../ui/LoadingNotify';
+import PopOverMenu from '../ui/PopOver/PopOverMenu';
 var BS_MAX_HEIGHT = Dimensions.get('window').height - 120;
 var NotifyContext = createContext(null);
 export var useNotify = function () {
@@ -49,7 +50,10 @@ export var NotifyProvider = function (_a) {
     var _z = useState(0), marginBottomBS = _z[0], setMarginBottomBs = _z[1];
     var bottomSheetRef = useRef(null);
     var _0 = useState(false), loaderVisible = _0[0], setLoaderVisible = _0[1];
-    var _1 = useState(undefined), fontFamily = _1[0], setFontFamily = _1[1];
+    var _1 = useState(false), popOverVisible = _1[0], setPopOverVisible = _1[1];
+    var _2 = useState({ px: 0, py: 0 }), popOverLocation = _2[0], setPopOverLocation = _2[1];
+    var _3 = useState(false), popOverComponent = _3[0], setPopOverComponent = _3[1];
+    var _4 = useState(undefined), fontFamily = _4[0], setFontFamily = _4[1];
     var showAlert = function (_a) {
         var title = _a.title, informative = _a.informative, actions = _a.actions, _b = _a.isBackgroundTouchClose, isBackgroundTouchClose = _b === void 0 ? true : _b, titleStyle = _a.titleStyle, informativeStyle = _a.informativeStyle, secondaryButtonStyle = _a.secondaryButtonStyle, primaryButtonStyle = _a.primaryButtonStyle, secondaryButtonTextStyle = _a.secondaryButtonTextStyle, primaryButtonTextStyle = _a.primaryButtonTextStyle, singleButtonTextStyle = _a.singleButtonTextStyle, fontFamily = _a.fontFamily;
         Keyboard.dismiss();
@@ -84,6 +88,12 @@ export var NotifyProvider = function (_a) {
     };
     var showLoader = function () {
         setLoaderVisible(true);
+    };
+    var showPopOverMenu = function (_a) {
+        var px = _a.px, py = _a.py, component = _a.component;
+        setPopOverLocation({ px: px, py: py });
+        setPopOverComponent(component);
+        setPopOverVisible(true);
     };
     var showSnackBar = function (_a) {
         var message = _a.message, _b = _a.type, type = _b === void 0 ? 'success' : _b, _c = _a.index, index = _c === void 0 ? Date.now() : _c, _d = _a.snackbarDuration, snackbarDuration = _d === void 0 ? 3000 : _d;
@@ -133,15 +143,20 @@ export var NotifyProvider = function (_a) {
             bottomSheetVisible: bottomSheetVisible,
             setBottomSheetVisible: setBottomSheetVisible,
             loaderVisible: loaderVisible,
+            popOverVisible: popOverVisible,
+            setPopOverVisible: setPopOverVisible,
             showAlert: showAlert,
             showSnackBar: showSnackBar,
             showBottomSheet: showBottomSheet,
             showLoader: showLoader,
+            showPopOverMenu: showPopOverMenu,
             hideNotify: hideNotify,
         }}>
             {children}
 
             <BottomSheetNotify ref={bottomSheetRef} contentsGestureEnable={contentsGestureEnable} bottomSheetComponent={bottomSheetComponent} bottomSheetPadding={bottomSheetPadding} marginBottomBS={marginBottomBS} isHandleVisible={handleVisible} bottomSheetMarginX={bottomSheetMarginX} isBottomRadius={isBottomRadius} bottomSheetBackgroundColor={bottomSheetBackgroundColor} maxHeight={bottomSheetMaxHeight}/>
+
+            <PopOverMenu px={popOverLocation === null || popOverLocation === void 0 ? void 0 : popOverLocation.px} py={popOverLocation === null || popOverLocation === void 0 ? void 0 : popOverLocation.py} component={popOverComponent}/>
 
             <SnackbarNotify customSnackbar={customSnackbar}/>
 

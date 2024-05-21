@@ -1,6 +1,7 @@
-import { Button, SafeAreaView, View } from "react-native"
+import { Button, SafeAreaView, Text, View } from "react-native"
 import { useNotify } from "../dist";
 import BSTextInput from "../dist/ui/BottomSheetNotify/ui/BSTextInput";
+import PopOverButton from "../dist/ui/PopOver/PopOverButton";
 
 const NotifyExample = () => {
     const { showAlert, showSnackBar, showBottomSheet } = useNotify();
@@ -8,6 +9,17 @@ const NotifyExample = () => {
     return (
         <SafeAreaView>
             <View style={{ gap: 30, marginTop: 30 }}>
+                    <PopOverButton
+                        popOverMenuComponent={
+                            <View style={{ padding: 30, backgroundColor: '#ff00ff' }}>
+                            </View>
+                        }
+                    >
+                        <View style={{ width: 100, height: 30, backgroundColor: '#0000ff' }}>
+                            <Text>팝 오버 버튼</Text>
+                        </View>
+                    </PopOverButton>
+
                 <Button
                     onPress={() => {
                         showAlert({
@@ -58,7 +70,7 @@ const NotifyExample = () => {
                             padding: 0,
                             isBottomRadius: true,
                             component:
-                                <View style={{ padding: 50,backgroundColor:'white' }}>
+                                <View style={{ padding: 50, backgroundColor: 'white' }}>
                                     <View style={{ borderWidth: 1 }}>
                                         <BSTextInput />
                                     </View>

@@ -13,12 +13,22 @@ export interface NotifyProps {
     // ---
     loaderVisible: boolean;
     // ---
+    popOverVisible: boolean;
+    setPopOverVisible: (visible: boolean) => void;
+    // ---
     showAlert: (props: ShowAlertProps) => void;
     showSnackBar: (props: ShowSnackBarProps) => void;
     showBottomSheet: (props: ShowBottomSheetProps) => void;
     showLoader: () => void;
+    showPopOverMenu: (props: PopOverMenuProps) => void;
     // ---
     hideNotify: (option: HideOption) => void;
+}
+
+export interface PopOverMenuProps {
+    px: number;
+    py: number;
+    component: React.ReactNode;
 }
 
 export interface ShowBottomSheetProps {

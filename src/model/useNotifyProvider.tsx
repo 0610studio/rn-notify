@@ -1,10 +1,11 @@
 import { createContext, useCallback, useContext, useRef, useState } from 'react';
 import { Dimensions, Keyboard, TextProps, TouchableOpacityProps } from 'react-native';
-import { AlertActions, BottomSheetRef, HideOption, NotifyProps, NotifyProviderProps, ShowAlertProps, ShowBottomSheetProps, ShowSnackBarProps, SnackItem } from './types';
+import { AlertActions, BottomSheetRef, HideOption, NotifyProps, NotifyProviderProps, PopOverMenuProps, ShowAlertProps, ShowBottomSheetProps, ShowSnackBarProps, SnackItem } from './types';
 import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
 import BottomSheetNotify from '../ui/BottomSheetNotify';
 import LoadingNotify from '../ui/LoadingNotify';
+import PopOverMenu from '../ui/PopOver/PopOverMenu';
 
 const BS_MAX_HEIGHT = Dimensions.get('window').height - 120;
 
@@ -55,6 +56,11 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
 
     // Loading
     const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
+
+    // PopOver
+    const [popOverVisible, setPopOverVisible] = useState<boolean>(false);
+    const [popOverLocation, setPopOverLocation] = useState<{ px: PopOverMenuProps['px'], py: PopOverMenuProps['py'] }>({ px: 0, py: 0 });
+    const [popOverComponent, setPopOverComponent] = useState<React.ReactNode>(false);
 
     // ---
     const [fontFamily, setFontFamily] = useState<string | undefined>(undefined);
@@ -120,6 +126,16 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
         setLoaderVisible(true);
     };
 
+    const showPopOverMenu = ({
+        px,
+        py,
+        component
+    }: PopOverMenuProps) => {
+        setPopOverLocation({ px, py });
+        setPopOverComponent(component);
+        setPopOverVisible(true);
+    }
+
     const showSnackBar = ({
         message,
         type = 'success',
@@ -179,10 +195,14 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
             // ---
             loaderVisible,
             // ---
+            popOverVisible,
+            setPopOverVisible,
+            // ---
             showAlert,
             showSnackBar,
             showBottomSheet,
             showLoader,
+            showPopOverMenu,
             // ---
             hideNotify,
         }}>
@@ -199,6 +219,12 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
                 isBottomRadius={isBottomRadius}
                 bottomSheetBackgroundColor={bottomSheetBackgroundColor}
                 maxHeight={bottomSheetMaxHeight}
+            />
+
+            <PopOverMenu
+                px={popOverLocation?.px}
+                py={popOverLocation?.py}
+                component={popOverComponent}
             />
 
             <SnackbarNotify
