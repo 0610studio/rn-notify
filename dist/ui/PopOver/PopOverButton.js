@@ -19,9 +19,6 @@ var PopOverButton = function (_a) {
     var buttonRef = useRef(null);
     var showPopOverMenu = useNotify().showPopOverMenu;
     var handlePress = useCallback(function () {
-        console.log('handlePress');
-        console.log('rightX : ' + rightX);
-        console.log('bottomY : ' + bottomY);
         if (rightX && bottomY) {
             showPopOverMenu({ px: rightX, py: bottomY, component: popOverMenuComponent });
         }
@@ -29,19 +26,12 @@ var PopOverButton = function (_a) {
     var onLayout = function (event) {
         var _a;
         (_a = buttonRef.current) === null || _a === void 0 ? void 0 : _a.measure(function (fx, fy, width, height, px, py) {
-            console.log('buttonRef 22');
-            console.log('width', width);
-            console.log('height', height);
-            console.log('px', px);
-            console.log('py', py);
             if (px !== undefined && px !== null) {
                 var getX = px + width;
-                console.log('getX', getX);
                 setRightX(getX);
             }
             if (py !== undefined && py !== null) {
                 var getY = py + height;
-                console.log('getY', getY);
                 setBottomY(getY);
             }
         });

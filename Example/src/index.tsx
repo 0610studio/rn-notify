@@ -9,6 +9,7 @@ const NotifyExample = () => {
     return (
         <SafeAreaView>
             <View style={{ gap: 30, marginTop: 30 }}>
+                <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-end', paddingRight: 20 }}>
                     <PopOverButton
                         popOverMenuComponent={
                             <View style={{ padding: 30, backgroundColor: '#ff00ff' }}>
@@ -16,9 +17,10 @@ const NotifyExample = () => {
                         }
                     >
                         <View style={{ width: 100, height: 30, backgroundColor: '#0000ff' }}>
-                            <Text>팝 오버 버튼</Text>
+                            <Text style={{ color: 'white' }}>팝 오버 버튼</Text>
                         </View>
                     </PopOverButton>
+                </View>
 
                 <Button
                     onPress={() => {
