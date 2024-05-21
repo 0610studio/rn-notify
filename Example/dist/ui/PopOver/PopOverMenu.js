@@ -23,7 +23,7 @@ var PopOverMenu = function (_a) {
         <Animated.View style={styles.modalBg} entering={FadeIn} exiting={FadeOut}>
                 <Pressable style={{ width: '100%', height: '100%' }} onPress={function () { setPopOverVisible(false); }}>
                     {isContentsVisible && (<Animated.View entering={FadeInUp} exiting={FadeOutUp}>
-                                <Pressable style={{ position: 'absolute', top: py, left: px - width }} onLayout={onLayout}>
+                                <Pressable style={[{ position: 'absolute', top: py, left: px - width }]} onLayout={onLayout}>
                                     {component}
                                 </Pressable>
                             </Animated.View>)}
@@ -41,7 +41,7 @@ var styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#212B3688',
         zIndex: 9997,
-    }
+    },
 });
 export default PopOverMenu;
 //# sourceMappingURL=PopOverMenu.js.map

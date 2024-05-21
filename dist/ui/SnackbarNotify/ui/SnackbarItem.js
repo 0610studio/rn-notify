@@ -22,8 +22,8 @@ var SnackbarItem = function (_a) {
     var close = function () {
         hideSnackBar(snackItem.index);
     };
-    return (<Animated.View style={[styles.container, { width: '90%', backgroundColor: '#ffffff' }]} entering={FadeInUp} exiting={FadeOutUp}>
-            <TouchableOpacity activeOpacity={1} onPress={close}>
+    return (<Animated.View style={[styles.container, styles.aosShadow, { width: '90%', marginTop: 10 }]} entering={FadeInUp} exiting={FadeOutUp}>
+            <TouchableOpacity style={[styles.container, styles.iosShadow, { width: '100%' }]} activeOpacity={1} onPress={close}>
                 {customSnackbar ?
             customSnackbar({ snackType: type, snackMessage: message })
             : (<View style={[styles.snackBar, { backgroundColor: type === 'error' ? '#fae6e6' : '#eef7ef' }]}>
@@ -35,11 +35,18 @@ var SnackbarItem = function (_a) {
         </Animated.View>);
 };
 var styles = StyleSheet.create({
-    container: __assign({ width: '90%', borderRadius: 16, overflow: 'hidden', marginTop: 10 }, Platform.select({
-        ios: { shadowColor: "rgb(50, 50, 50)", shadowOpacity: 0.1, shadowRadius: 3, shadowOffset: { height: 1, width: 1 } },
+    container: {
+        borderRadius: 16,
+        backgroundColor: 'white',
+    },
+    iosShadow: __assign({}, Platform.select({
+        ios: { shadowColor: "rgb(50, 50, 50, 1)", shadowOpacity: 0.12, shadowRadius: 5, shadowOffset: { height: 3, width: 0 } },
+    })),
+    aosShadow: __assign({}, Platform.select({
         android: { elevation: 5 }
     })),
     snackBar: {
+        borderRadius: 16,
         paddingHorizontal: 10,
         paddingVertical: 18,
         flexDirection: 'row',
