@@ -89,4 +89,19 @@ showBottomSheet({
         </View>
 });
 
+
+// 팝 오버 메뉴
+<View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-end', paddingRight: 20 }}>
+    <PopOverButton
+        popOverMenuComponent={
+            <View style={{ padding: 30, backgroundColor: '#ff00ff' }}>
+            </View>
+        }
+    >
+        <View style={{ width: 100, height: 30, backgroundColor: '#0000ff' }}>
+            <Text style={{ color: 'white' }}>팝 오버 버튼</Text>
+        </View>
+    </PopOverButton>
+</View>
+
 ```
