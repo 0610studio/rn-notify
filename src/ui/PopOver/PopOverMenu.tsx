@@ -1,8 +1,8 @@
-import { Dimensions, LayoutChangeEvent, Pressable, StyleSheet } from "react-native";
+import { BackHandler, Dimensions, LayoutChangeEvent, Pressable, StyleSheet } from "react-native";
 import { useNotify } from "../../model/useNotifyProvider";
 import { PopOverMenuProps } from "../../model/types";
 import Animated, { FadeIn, FadeInUp, FadeOut, FadeOutUp } from "react-native-reanimated";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const PopOverMenu = ({
     px,
@@ -15,6 +15,21 @@ const PopOverMenu = ({
         popOverVisible,
         setPopOverVisible
     } = useNotify();
+
+    const backPressHandler = useCallback(() => {
+        if (popOverVisible) {
+            setIsContentsVisible(false);
+            setPopOverVisible(false);
+            return true;
+        }
+        return false;
+    }, [popOverVisible, setIsContentsVisible]);
+
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', backPressHandler);
+
+        return () => backHandler.remove();
+    }, [backPressHandler]);
 
     const onLayout = (event: LayoutChangeEvent) => {
         setWidth(event.nativeEvent.layout?.width || 0);

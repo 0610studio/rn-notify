@@ -1,4 +1,4 @@
-import { Button, SafeAreaView, Text, View } from "react-native"
+import { Button, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 import { useNotify } from "../dist";
 import BSTextInput from "../dist/ui/BottomSheetNotify/ui/BSTextInput";
 import PopOverButton from "../dist/ui/PopOver/PopOverButton";
@@ -9,16 +9,28 @@ const NotifyExample = () => {
     return (
         <SafeAreaView>
             <View style={{ gap: 30, marginTop: 30 }}>
-                <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-end', paddingRight: 20 }}>
+                <View style={{ width: '100%', alignItems: 'center' }}>
                     <PopOverButton
                         popOverMenuComponent={
-                            <View style={{ padding: 30, backgroundColor: '#ff00ff' }}>
+                            <View style={{ paddingVertical: 8, paddingHorizontal: 20, backgroundColor: '#ffffff', borderRadius: 14 }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 10 }}>
+                                    <Text style={{ color: 'red' }}>삭제하기</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 10 }}>
+                                    <Text style={{ color: 'orange' }}>수정하기</Text>
+                                </View>
                             </View>
                         }
                     >
-                        <View style={{ width: 100, height: 30, backgroundColor: '#0000ff' }}>
-                            <Text style={{ color: 'white' }}>팝 오버 버튼</Text>
+                        <View style={{ paddingRight: 10, paddingLeft: 15, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: 'grey', borderRadius: 30, paddingVertical: 10 }}>
+                            <Text style={{ color: 'black', paddingLeft: 12 }}>팝오버 메뉴</Text>
+                            <View style={{ width: 30, height: 30, borderRadius: 18, borderWidth: 2.2, borderColor: '#ff00ff', marginLeft: 40, justifyContent: 'center', alignItems: 'center' }}>
+                                <View style={{ width: 4, height: 4, borderRadius: 2, backgroundColor: '#ff00ff' }}></View>
+                                <View style={{ width: 4, height: 4, borderRadius: 2, marginVertical: 3, backgroundColor: '#ff00ff' }}></View>
+                                <View style={{ width: 4, height: 4, borderRadius: 2, backgroundColor: '#ff00ff' }}></View>
+                            </View>
                         </View>
+
                     </PopOverButton>
                 </View>
 
