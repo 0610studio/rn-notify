@@ -178,6 +178,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
                 setSnackItemStack([]);
                 setBottomSheetVisible(false);
                 setLoaderVisible(false);
+                setPopOverVisible(false);
                 break;
             default:
                 break;

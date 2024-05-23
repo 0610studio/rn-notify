@@ -132,6 +132,7 @@ export var NotifyProvider = function (_a) {
                 setSnackItemStack([]);
                 setBottomSheetVisible(false);
                 setLoaderVisible(false);
+                setPopOverVisible(false);
                 break;
             default:
                 break;
