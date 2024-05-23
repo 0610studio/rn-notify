@@ -1,49 +1,56 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { View, Pressable, ViewProps, LayoutChangeEvent } from 'react-native';
+import React, { useRef, useCallback } from 'react';
+import { View, Pressable, ViewProps, StyleSheet } from 'react-native';
 import { useNotify } from '../../model/useNotifyProvider';
 
 interface PopOverButtonProps extends ViewProps {
+  width: number;
+  height: number;
+  backgroundColor?: string;
   popOverMenuComponent: React.ReactNode;
 }
 
-const PopOverButton = ({
+const PopOverButton: React.FC<PopOverButtonProps> = ({
+  width,
+  height,
+  backgroundColor = 'transparent',
   popOverMenuComponent,
+  children,
   ...props
-}: PopOverButtonProps) => {
-  const [rightX, setRightX] = useState<number>();
-  const [bottomY, setBottomY] = useState<number>();
+}) => {
   const buttonRef = useRef<View>(null);
-  const {
-    showPopOverMenu
-  } = useNotify();
+  const { showPopOverMenu } = useNotify();
 
   const handlePress = useCallback(() => {
-    if (rightX && bottomY) {
-      showPopOverMenu({ px: rightX, py: bottomY, component: popOverMenuComponent });
-    }
-  }, [rightX, bottomY]);
+    buttonRef.current?.measure((fx, fy, measuredWidth, measuredHeight, pageX, pageY) => {
+      if (pageX !== undefined && pageY !== undefined) {
+        const rbX = pageX + measuredWidth;
+        const rbY = pageY + measuredHeight;
 
-  const onLayout = (event: LayoutChangeEvent) => {
-    buttonRef.current?.measure((fx, fy, width, height, px, py) => {
-      if (px !== undefined && px !== null) {
-        const getX = px + width;
-        setRightX(getX)
-      }
-      if (py !== undefined && py !== null) {
-        const getY = py + height;
-        setBottomY(getY);
+        showPopOverMenu({ px: rbX, py: rbY, component: popOverMenuComponent });
       }
     });
-  };
-
+  }, [showPopOverMenu, popOverMenuComponent]);
 
   return (
-    <Pressable onPress={handlePress} style={{ alignItems: 'flex-start' }}>
-      <View ref={buttonRef} onLayout={onLayout}>
-        {props.children}
+    <Pressable onPress={handlePress} style={styles.pressable}>
+      <View
+        ref={buttonRef}
+        style={[styles.button, { width, height, backgroundColor }]}
+        {...props}
+      >
+        {children}
       </View>
     </Pressable>
   );
 };
+
+const styles = StyleSheet.create({
+  pressable: {
+    alignItems: 'flex-start',
+  },
+  button: {
+    justifyContent: 'center',
+  },
+});
 
 export default PopOverButton;

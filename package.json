@@ -1,6 +1,6 @@
 {
   "name": "@0610studio/rn-notify",
-  "version": "0.0.19",
+  "version": "0.0.21",
   "private": false,
   "description": "",
   "main": "dist/index.js",
@@ -14,7 +14,7 @@
     "build:tsc": "rm -rf dist && rm -rf Example/dist && tsc && cp -R src/assets dist/assets && cp -R dist Example/dist",
     "publish:npm": "npm publish --access public",
     "clean": "rm -rf dist && rm -rf Example/dist && rm -rf Example/ios/Pods && rm -rf Example/ios/Podfile.lock && rm -rf Example/ios/build && rm -rf Example/android/app/build && rm -rf node_modules && rm -rf Example/node_modules && rm -rf yarn.lock && rm -rf Example/yarn.lock",
-    "postinstall": "cd Example && yarn install && cd ios && pod install"
+    "example:install": "cd Example && yarn install && cd ios && pod install"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

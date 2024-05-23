@@ -91,17 +91,28 @@ showBottomSheet({
 
 
 // 팝 오버 메뉴
-<View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-end', paddingRight: 20 }}>
-    <PopOverButton
-        popOverMenuComponent={
-            <View style={{ padding: 30, backgroundColor: '#ff00ff' }}>
+<PopOverButton
+    width={180}
+    height={30}
+    popOverMenuComponent={
+        <View style={{ paddingVertical: 8, paddingHorizontal: 100, backgroundColor: '#ffffff', borderRadius: 14 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 10 }}>
+                <Text style={{ color: 'red' }}>삭제하기</Text>
             </View>
-        }
-    >
-        <View style={{ width: 100, height: 30, backgroundColor: '#0000ff' }}>
-            <Text style={{ color: 'white' }}>팝 오버 버튼</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 10 }}>
+                <Text style={{ color: 'orange' }}>수정하기</Text>
+            </View>
         </View>
-    </PopOverButton>
-</View>
+    }
+>
+    <View style={{ paddingRight: 10, paddingLeft: 15, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: 'grey', borderRadius: 30, paddingVertical: 10 }}>
+        <Text style={{ color: 'black', paddingLeft: 12 }}>팝오버 메뉴</Text>
+        <View style={{ width: 30, height: 30, borderRadius: 18, borderWidth: 2.2, borderColor: '#ff00ff', marginLeft: 40, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ width: 4, height: 4, borderRadius: 2, backgroundColor: '#ff00ff' }}></View>
+            <View style={{ width: 4, height: 4, borderRadius: 2, marginVertical: 3, backgroundColor: '#ff00ff' }}></View>
+            <View style={{ width: 4, height: 4, borderRadius: 2, backgroundColor: '#ff00ff' }}></View>
+        </View>
+    </View>
+</PopOverButton>
 
 ```

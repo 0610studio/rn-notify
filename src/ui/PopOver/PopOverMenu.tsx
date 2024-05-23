@@ -4,6 +4,8 @@ import { PopOverMenuProps } from "../../model/types";
 import Animated, { FadeIn, FadeInUp, FadeOut, FadeOutUp } from "react-native-reanimated";
 import { useCallback, useEffect, useState } from "react";
 
+const WINDOW_HEIGHT = Dimensions.get('window').height;
+
 const PopOverMenu = ({
     px,
     py,
@@ -11,6 +13,7 @@ const PopOverMenu = ({
 }: PopOverMenuProps) => {
     const [isContentsVisible, setIsContentsVisible] = useState<boolean>(false);
     const [width, setWidth] = useState<number>(0);
+    const [height, setHeight] = useState<number>(0);
     const {
         popOverVisible,
         setPopOverVisible
@@ -33,6 +36,7 @@ const PopOverMenu = ({
 
     const onLayout = (event: LayoutChangeEvent) => {
         setWidth(event.nativeEvent.layout?.width || 0);
+        setHeight(event.nativeEvent.layout?.height || 0);
     };
 
     useEffect(() => {
@@ -42,6 +46,9 @@ const PopOverMenu = ({
             }, 200);
         };
     }, [popOverVisible]);
+
+    const isVerticalReverse = WINDOW_HEIGHT < (py + height);
+    const isHorizontalReverse = Dimensions.get('window').width > (px + width);
 
     return (
         popOverVisible ?
@@ -57,7 +64,7 @@ const PopOverMenu = ({
                                 entering={FadeInUp}
                                 exiting={FadeOutUp}
                             >
-                                <Pressable style={{ position: 'absolute', top: py, left: px - width }} onLayout={onLayout}>
+                                <Pressable style={{ position: 'absolute', top: py - (isVerticalReverse ? (height + 10) : 0), left: px - width + (isHorizontalReverse ? width : 0) }} onLayout={onLayout}>
                                     {component}
                                 </Pressable>
                             </Animated.View>

@@ -11,6 +11,8 @@ const NotifyExample = () => {
             <View style={{ gap: 30, marginTop: 30 }}>
                 <View style={{ width: '100%', alignItems: 'center' }}>
                     <PopOverButton
+                        width={100}
+                        height={30}
                         popOverMenuComponent={
                             <View style={{ paddingVertical: 8, paddingHorizontal: 20, backgroundColor: '#ffffff', borderRadius: 14 }}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 10 }}>

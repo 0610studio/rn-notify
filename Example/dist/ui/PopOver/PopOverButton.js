@@ -9,38 +9,36 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import React, { useCallback, useRef, useState } from 'react';
-import { View, Pressable } from 'react-native';
+import React, { useRef, useCallback } from 'react';
+import { View, Pressable, StyleSheet } from 'react-native';
 import { useNotify } from '../../model/useNotifyProvider';
 var PopOverButton = function (_a) {
-    var popOverMenuComponent = _a.popOverMenuComponent, props = __rest(_a, ["popOverMenuComponent"]);
-    var _b = useState(), rightX = _b[0], setRightX = _b[1];
-    var _c = useState(), bottomY = _c[0], setBottomY = _c[1];
+    var width = _a.width, height = _a.height, _b = _a.backgroundColor, backgroundColor = _b === void 0 ? 'transparent' : _b, popOverMenuComponent = _a.popOverMenuComponent, children = _a.children, props = __rest(_a, ["width", "height", "backgroundColor", "popOverMenuComponent", "children"]);
     var buttonRef = useRef(null);
     var showPopOverMenu = useNotify().showPopOverMenu;
     var handlePress = useCallback(function () {
-        if (rightX && bottomY) {
-            showPopOverMenu({ px: rightX, py: bottomY, component: popOverMenuComponent });
-        }
-    }, [rightX, bottomY]);
-    var onLayout = function (event) {
         var _a;
-        (_a = buttonRef.current) === null || _a === void 0 ? void 0 : _a.measure(function (fx, fy, width, height, px, py) {
-            if (px !== undefined && px !== null) {
-                var getX = px + width;
-                setRightX(getX);
-            }
-            if (py !== undefined && py !== null) {
-                var getY = py + height;
-                setBottomY(getY);
+        (_a = buttonRef.current) === null || _a === void 0 ? void 0 : _a.measure(function (fx, fy, measuredWidth, measuredHeight, pageX, pageY) {
+            if (pageX !== undefined && pageY !== undefined) {
+                var rbX = pageX + measuredWidth;
+                var rbY = pageY + measuredHeight;
+                showPopOverMenu({ px: rbX, py: rbY, component: popOverMenuComponent });
             }
         });
-    };
-    return (<Pressable onPress={handlePress} style={{ alignItems: 'flex-start' }}>
-      <View ref={buttonRef} onLayout={onLayout}>
-        {props.children}
+    }, [showPopOverMenu, popOverMenuComponent]);
+    return (<Pressable onPress={handlePress} style={styles.pressable}>
+      <View ref={buttonRef} style={[styles.button, { width: width, height: height, backgroundColor: backgroundColor }]} {...props}>
+        {children}
       </View>
     </Pressable>);
 };
+var styles = StyleSheet.create({
+    pressable: {
+        alignItems: 'flex-start',
+    },
+    button: {
+        justifyContent: 'center',
+    },
+});
 export default PopOverButton;
 //# sourceMappingURL=PopOverButton.js.map
