@@ -124,6 +124,9 @@ export var NotifyProvider = function (_a) {
             case 'loader':
                 setLoaderVisible(false);
                 break;
+            case 'popOver':
+                setPopOverVisible(false);
+                break;
             case 'all':
                 setAlertVisible(false);
                 setSnackItemStack([]);

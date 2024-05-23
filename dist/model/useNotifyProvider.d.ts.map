@@ -1,1 +1,1 @@
-{"version":3,"file":"useNotifyProvider.d.ts","sourceRoot":"","sources":["../../src/model/useNotifyProvider.tsx"],"names":[],"mappings":";AAEA,OAAO,EAA4C,WAAW,EAAE,mBAAmB,EAAwF,MAAM,SAAS,CAAC;AAW3L,eAAO,MAAM,SAAS,mBAMrB,CAAA;AAED,eAAO,MAAM,cAAc,EAAE,KAAK,CAAC,EAAE,CAAC,mBAAmB,CAwOxD,CAAA"}
+{"version":3,"file":"useNotifyProvider.d.ts","sourceRoot":"","sources":["../../src/model/useNotifyProvider.tsx"],"names":[],"mappings":";AAEA,OAAO,EAA4C,WAAW,EAAE,mBAAmB,EAAwF,MAAM,SAAS,CAAC;AAW3L,eAAO,MAAM,SAAS,mBAMrB,CAAA;AAED,eAAO,MAAM,cAAc,EAAE,KAAK,CAAC,EAAE,CAAC,mBAAmB,CA2OxD,CAAA"}

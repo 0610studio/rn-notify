@@ -71,7 +71,7 @@ export interface SnackItem {
     snackbarDuration?: number;
 }
 export type SnackType = 'success' | 'error' | '';
-export type HideOption = 'all' | 'snack' | 'alert' | 'bottomSheet' | 'loader';
+export type HideOption = 'all' | 'snack' | 'alert' | 'bottomSheet' | 'loader' | 'popOver';
 export interface ShowSnackBarProps {
     message: string;
     type?: SnackType;

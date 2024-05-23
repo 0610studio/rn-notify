@@ -170,6 +170,9 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
             case 'loader':
                 setLoaderVisible(false);
                 break;
+            case 'popOver':
+                setPopOverVisible(false);
+                break;
             case 'all':
                 setAlertVisible(false);
                 setSnackItemStack([]);
