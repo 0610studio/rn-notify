@@ -141,7 +141,7 @@ const useBottomSheetNotify = ({
             setIsKeyboardVisible(false);
             
             // 키보드가 사라질 때 화면의 높이를 원래대로 돌립니다.
-            if (!fullScreen.value || !bottomSheetVisible) return;
+            if (!fullScreen.value) return;
             handleVisible(true);
         });
 

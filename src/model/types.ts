@@ -41,6 +41,7 @@ export interface ShowBottomSheetProps {
     component: React.ReactNode;
     contentsGestureEnable?: boolean;
     maxHeight?: number;
+    isScrollView?: boolean;
 };
 
 export interface CustomSnackbarProps {

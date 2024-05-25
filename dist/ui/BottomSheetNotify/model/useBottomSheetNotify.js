@@ -96,7 +96,7 @@ var useBottomSheetNotify = function (_a) {
         });
         var keyboardDidHideListener = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', function () {
             setIsKeyboardVisible(false);
-            if (!fullScreen.value || !bottomSheetVisible)
+            if (!fullScreen.value)
                 return;
             handleVisible(true);
         });

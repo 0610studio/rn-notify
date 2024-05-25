@@ -49,6 +49,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
     const [bottomSheetPadding, setBottomSheetPadding] = useState<number>(0);
     const [bottomSheetMarginX, setBottomSheetMarginX] = useState<number>(0);
     const [bottomSheetMaxHeight, setBottomSheetMaxHeight] = useState<number>(BS_MAX_HEIGHT);
+    const [bottomSheetScrollView, setBottomSheetScrollView] = useState<boolean>(true);
     const [isBottomRadius, setIsBottomRadius] = useState<boolean>(true);
     const [handleVisible, setHandleVisible] = useState<boolean>(true);
     const [marginBottomBS, setMarginBottomBs] = useState<number>(0);
@@ -108,6 +109,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
         backgroundColor = '#ffffff',
         isBottomRadius = true,
         maxHeight = BS_MAX_HEIGHT,
+        isScrollView = true
     }: ShowBottomSheetProps) => {
         Keyboard.dismiss();
         setHandleVisible(isHandleVisible);
@@ -119,6 +121,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
         setIsBottomRadius(isBottomRadius);
         setBottomSheetBackgroundColor(backgroundColor);
         setBottomSheetMaxHeight(maxHeight);
+        setBottomSheetScrollView(isScrollView);
         bottomSheetRef.current?.handleVisible(true);
     };
 
@@ -223,6 +226,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
                 isBottomRadius={isBottomRadius}
                 bottomSheetBackgroundColor={bottomSheetBackgroundColor}
                 maxHeight={bottomSheetMaxHeight}
+                isScrollView={bottomSheetScrollView}
             />
 
             <PopOverMenu

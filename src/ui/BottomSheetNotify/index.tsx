@@ -19,6 +19,7 @@ interface Props extends ViewProps {
   bottomSheetMarginX: number;
   isBottomRadius: boolean;
   maxHeight: number;
+  isScrollView: boolean;
 }
 
 const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
@@ -32,6 +33,7 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
   bottomSheetMarginX,
   isBottomRadius,
   maxHeight,
+  isScrollView
 }, ref) => {
   const {
     bottomSheetVisible,
@@ -110,6 +112,7 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
                       bottomSheetComponent={bottomSheetComponent}
                       bottomSheetPadding={bottomSheetPadding}
                       maxHeight={maxHeight}
+                      isScrollView={isScrollView}
                     />
                   </GestureDetector>
                 </Pressable>

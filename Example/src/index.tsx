@@ -1,4 +1,4 @@
-import { Button, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
+import { Button, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { useNotify } from "../dist";
 import BSTextInput from "../dist/ui/BottomSheetNotify/ui/BSTextInput";
 import PopOverButton from "../dist/ui/PopOver/PopOverButton";
@@ -100,6 +100,8 @@ const NotifyExample = () => {
                     title="show_BottomSheet"
                     color="#331599"
                 />
+
+                <TextInput style={{width:'100%', height:50,borderWidth:1}}></TextInput>
             </View>
         </SafeAreaView>
     )

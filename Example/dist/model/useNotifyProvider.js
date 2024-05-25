@@ -45,15 +45,16 @@ export var NotifyProvider = function (_a) {
     var _u = useState(0), bottomSheetPadding = _u[0], setBottomSheetPadding = _u[1];
     var _v = useState(0), bottomSheetMarginX = _v[0], setBottomSheetMarginX = _v[1];
     var _w = useState(BS_MAX_HEIGHT), bottomSheetMaxHeight = _w[0], setBottomSheetMaxHeight = _w[1];
-    var _x = useState(true), isBottomRadius = _x[0], setIsBottomRadius = _x[1];
-    var _y = useState(true), handleVisible = _y[0], setHandleVisible = _y[1];
-    var _z = useState(0), marginBottomBS = _z[0], setMarginBottomBs = _z[1];
+    var _x = useState(true), bottomSheetScrollView = _x[0], setBottomSheetScrollView = _x[1];
+    var _y = useState(true), isBottomRadius = _y[0], setIsBottomRadius = _y[1];
+    var _z = useState(true), handleVisible = _z[0], setHandleVisible = _z[1];
+    var _0 = useState(0), marginBottomBS = _0[0], setMarginBottomBs = _0[1];
     var bottomSheetRef = useRef(null);
-    var _0 = useState(false), loaderVisible = _0[0], setLoaderVisible = _0[1];
-    var _1 = useState(false), popOverVisible = _1[0], setPopOverVisible = _1[1];
-    var _2 = useState({ px: 0, py: 0 }), popOverLocation = _2[0], setPopOverLocation = _2[1];
-    var _3 = useState(false), popOverComponent = _3[0], setPopOverComponent = _3[1];
-    var _4 = useState(undefined), fontFamily = _4[0], setFontFamily = _4[1];
+    var _1 = useState(false), loaderVisible = _1[0], setLoaderVisible = _1[1];
+    var _2 = useState(false), popOverVisible = _2[0], setPopOverVisible = _2[1];
+    var _3 = useState({ px: 0, py: 0 }), popOverLocation = _3[0], setPopOverLocation = _3[1];
+    var _4 = useState(false), popOverComponent = _4[0], setPopOverComponent = _4[1];
+    var _5 = useState(undefined), fontFamily = _5[0], setFontFamily = _5[1];
     var showAlert = function (_a) {
         var title = _a.title, informative = _a.informative, actions = _a.actions, _b = _a.isBackgroundTouchClose, isBackgroundTouchClose = _b === void 0 ? true : _b, titleStyle = _a.titleStyle, informativeStyle = _a.informativeStyle, secondaryButtonStyle = _a.secondaryButtonStyle, primaryButtonStyle = _a.primaryButtonStyle, secondaryButtonTextStyle = _a.secondaryButtonTextStyle, primaryButtonTextStyle = _a.primaryButtonTextStyle, singleButtonTextStyle = _a.singleButtonTextStyle, fontFamily = _a.fontFamily;
         Keyboard.dismiss();
@@ -73,7 +74,7 @@ export var NotifyProvider = function (_a) {
     };
     var showBottomSheet = function (_a) {
         var _b;
-        var _c = _a.isHandleVisible, isHandleVisible = _c === void 0 ? true : _c, component = _a.component, _d = _a.contentsGestureEnable, contentsGestureEnable = _d === void 0 ? true : _d, _e = _a.marginHorizontal, marginHorizontal = _e === void 0 ? 10 : _e, _f = _a.padding, padding = _f === void 0 ? 20 : _f, _g = _a.marginBottom, marginBottom = _g === void 0 ? 10 : _g, _h = _a.backgroundColor, backgroundColor = _h === void 0 ? '#ffffff' : _h, _j = _a.isBottomRadius, isBottomRadius = _j === void 0 ? true : _j, _k = _a.maxHeight, maxHeight = _k === void 0 ? BS_MAX_HEIGHT : _k;
+        var _c = _a.isHandleVisible, isHandleVisible = _c === void 0 ? true : _c, component = _a.component, _d = _a.contentsGestureEnable, contentsGestureEnable = _d === void 0 ? true : _d, _e = _a.marginHorizontal, marginHorizontal = _e === void 0 ? 10 : _e, _f = _a.padding, padding = _f === void 0 ? 20 : _f, _g = _a.marginBottom, marginBottom = _g === void 0 ? 10 : _g, _h = _a.backgroundColor, backgroundColor = _h === void 0 ? '#ffffff' : _h, _j = _a.isBottomRadius, isBottomRadius = _j === void 0 ? true : _j, _k = _a.maxHeight, maxHeight = _k === void 0 ? BS_MAX_HEIGHT : _k, _l = _a.isScrollView, isScrollView = _l === void 0 ? true : _l;
         Keyboard.dismiss();
         setHandleVisible(isHandleVisible);
         setBottomSheetPadding(padding);
@@ -84,6 +85,7 @@ export var NotifyProvider = function (_a) {
         setIsBottomRadius(isBottomRadius);
         setBottomSheetBackgroundColor(backgroundColor);
         setBottomSheetMaxHeight(maxHeight);
+        setBottomSheetScrollView(isScrollView);
         (_b = bottomSheetRef.current) === null || _b === void 0 ? void 0 : _b.handleVisible(true);
     };
     var showLoader = function () {
@@ -159,7 +161,7 @@ export var NotifyProvider = function (_a) {
         }}>
             {children}
 
-            <BottomSheetNotify ref={bottomSheetRef} contentsGestureEnable={contentsGestureEnable} bottomSheetComponent={bottomSheetComponent} bottomSheetPadding={bottomSheetPadding} marginBottomBS={marginBottomBS} isHandleVisible={handleVisible} bottomSheetMarginX={bottomSheetMarginX} isBottomRadius={isBottomRadius} bottomSheetBackgroundColor={bottomSheetBackgroundColor} maxHeight={bottomSheetMaxHeight}/>
+            <BottomSheetNotify ref={bottomSheetRef} contentsGestureEnable={contentsGestureEnable} bottomSheetComponent={bottomSheetComponent} bottomSheetPadding={bottomSheetPadding} marginBottomBS={marginBottomBS} isHandleVisible={handleVisible} bottomSheetMarginX={bottomSheetMarginX} isBottomRadius={isBottomRadius} bottomSheetBackgroundColor={bottomSheetBackgroundColor} maxHeight={bottomSheetMaxHeight} isScrollView={bottomSheetScrollView}/>
 
             <PopOverMenu px={popOverLocation === null || popOverLocation === void 0 ? void 0 : popOverLocation.px} py={popOverLocation === null || popOverLocation === void 0 ? void 0 : popOverLocation.py} component={popOverComponent}/>
 

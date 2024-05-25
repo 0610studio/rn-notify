@@ -13,6 +13,7 @@ interface Props {
     bottomSheetComponent: React.ReactNode;
     bottomSheetPadding: number;
     maxHeight: number;
+    isScrollView: boolean;
 }
 
 const ContentsComponent = ({
@@ -24,7 +25,8 @@ const ContentsComponent = ({
     screenHeight,
     bottomSheetComponent,
     bottomSheetPadding,
-    maxHeight
+    maxHeight,
+    isScrollView
 }: Props) => {
 
     const onLayout = (event: LayoutChangeEvent) => {
@@ -41,20 +43,26 @@ const ContentsComponent = ({
 
 
     return (
-        <ScrollView
-            simultaneousHandlers={[panGestureRef]}
-            onScroll={handleScroll}
-            style={{ maxHeight: maxHeight }}
-            keyboardShouldPersistTaps="handled"
-            bounces={false}
-            bouncesZoom={false}
-            showsVerticalScrollIndicator={false}
-            scrollEventThrottle={16}
-        >
-            <View style={[{ width: '100%', minHeight: 1, paddingBottom: bottomSheetPadding }]} onLayout={onLayout}>
+        isScrollView ? (
+            <ScrollView
+                simultaneousHandlers={[panGestureRef]}
+                onScroll={handleScroll}
+                style={{ maxHeight: maxHeight }}
+                keyboardShouldPersistTaps="handled"
+                bounces={false}
+                bouncesZoom={false}
+                showsVerticalScrollIndicator={false}
+                scrollEventThrottle={16}
+            >
+                <View style={[{ width: '100%', minHeight: 1, paddingBottom: bottomSheetPadding }]} onLayout={onLayout}>
+                    {bottomSheetComponent}
+                </View>
+            </ScrollView>
+        ) : (
+            <View style={[{ width: '100%', minHeight: 1, paddingBottom: bottomSheetPadding, maxHeight: maxHeight }]} onLayout={onLayout}>
                 {bottomSheetComponent}
             </View>
-        </ScrollView>
+        )
     )
 };
 

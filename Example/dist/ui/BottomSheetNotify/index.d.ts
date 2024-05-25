@@ -12,6 +12,7 @@ interface Props extends ViewProps {
     bottomSheetMarginX: number;
     isBottomRadius: boolean;
     maxHeight: number;
+    isScrollView: boolean;
 }
 declare const BottomSheetNotify: import("react").ForwardRefExoticComponent<Props & import("react").RefAttributes<BottomSheetNotifyRef>>;
 export default BottomSheetNotify;

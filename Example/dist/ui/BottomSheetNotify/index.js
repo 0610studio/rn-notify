@@ -6,7 +6,7 @@ import useBottomSheetNotify from './model/useBottomSheetNotify';
 import ContentsComponent from './ui/ContentsComponent';
 var DEFAULT_BORDER_RADIUS = 24;
 var BottomSheetNotify = forwardRef(function (_a, ref) {
-    var marginBottomBS = _a.marginBottomBS, bottomSheetPadding = _a.bottomSheetPadding, bottomSheetBackgroundColor = _a.bottomSheetBackgroundColor, _b = _a.closeOffset, closeOffset = _b === void 0 ? Dimensions.get('window').height : _b, contentsGestureEnable = _a.contentsGestureEnable, bottomSheetComponent = _a.bottomSheetComponent, isHandleVisible = _a.isHandleVisible, bottomSheetMarginX = _a.bottomSheetMarginX, isBottomRadius = _a.isBottomRadius, maxHeight = _a.maxHeight;
+    var marginBottomBS = _a.marginBottomBS, bottomSheetPadding = _a.bottomSheetPadding, bottomSheetBackgroundColor = _a.bottomSheetBackgroundColor, _b = _a.closeOffset, closeOffset = _b === void 0 ? Dimensions.get('window').height : _b, contentsGestureEnable = _a.contentsGestureEnable, bottomSheetComponent = _a.bottomSheetComponent, isHandleVisible = _a.isHandleVisible, bottomSheetMarginX = _a.bottomSheetMarginX, isBottomRadius = _a.isBottomRadius, maxHeight = _a.maxHeight, isScrollView = _a.isScrollView;
     var _c = useBottomSheetNotify({
         marginBottomBS: marginBottomBS,
         bottomSheetPadding: bottomSheetPadding,
@@ -44,7 +44,7 @@ var BottomSheetNotify = forwardRef(function (_a, ref) {
                     </View>}
 
                   <GestureDetector gesture={onTapEvent}>
-                    <ContentsComponent panGestureRef={panGestureRef} listScrollPosition={listScrollPosition} handleHeight={handleHeight} openPosition={openPosition} correction={correction} screenHeight={screenHeight} bottomSheetComponent={bottomSheetComponent} bottomSheetPadding={bottomSheetPadding} maxHeight={maxHeight}/>
+                    <ContentsComponent panGestureRef={panGestureRef} listScrollPosition={listScrollPosition} handleHeight={handleHeight} openPosition={openPosition} correction={correction} screenHeight={screenHeight} bottomSheetComponent={bottomSheetComponent} bottomSheetPadding={bottomSheetPadding} maxHeight={maxHeight} isScrollView={isScrollView}/>
                   </GestureDetector>
                 </Pressable>
               </Animated.View>

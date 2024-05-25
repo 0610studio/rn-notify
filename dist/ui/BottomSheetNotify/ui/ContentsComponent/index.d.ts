@@ -11,7 +11,8 @@ interface Props {
     bottomSheetComponent: React.ReactNode;
     bottomSheetPadding: number;
     maxHeight: number;
+    isScrollView: boolean;
 }
-declare const ContentsComponent: ({ panGestureRef, listScrollPosition, handleHeight, openPosition, correction, screenHeight, bottomSheetComponent, bottomSheetPadding, maxHeight }: Props) => import("react").JSX.Element;
+declare const ContentsComponent: ({ panGestureRef, listScrollPosition, handleHeight, openPosition, correction, screenHeight, bottomSheetComponent, bottomSheetPadding, maxHeight, isScrollView }: Props) => import("react").JSX.Element;
 export default ContentsComponent;
 //# sourceMappingURL=index.d.ts.map
