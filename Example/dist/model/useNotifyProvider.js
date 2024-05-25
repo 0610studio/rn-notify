@@ -111,6 +111,7 @@ export var NotifyProvider = function (_a) {
         setSnackItemStack(function (prev) { return prev.filter(function (item) { return item.index !== index; }); });
     };
     var hideNotify = useCallback(function (option) {
+        var _a, _b;
         switch (option) {
             case 'alert':
                 setAlertVisible(false);
@@ -119,7 +120,7 @@ export var NotifyProvider = function (_a) {
                 setSnackItemStack([]);
                 break;
             case 'bottomSheet':
-                setBottomSheetVisible(false);
+                (_a = bottomSheetRef.current) === null || _a === void 0 ? void 0 : _a.handleVisible(false);
                 break;
             case 'loader':
                 setLoaderVisible(false);
@@ -130,9 +131,9 @@ export var NotifyProvider = function (_a) {
             case 'all':
                 setAlertVisible(false);
                 setSnackItemStack([]);
-                setBottomSheetVisible(false);
                 setLoaderVisible(false);
                 setPopOverVisible(false);
+                (_b = bottomSheetRef.current) === null || _b === void 0 ? void 0 : _b.handleVisible(false);
                 break;
             default:
                 break;

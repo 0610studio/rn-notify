@@ -165,7 +165,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
                 setSnackItemStack([]);
                 break;
             case 'bottomSheet':
-                setBottomSheetVisible(false);
+                bottomSheetRef.current?.handleVisible(false);
                 break;
             case 'loader':
                 setLoaderVisible(false);
@@ -176,9 +176,9 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
             case 'all':
                 setAlertVisible(false);
                 setSnackItemStack([]);
-                setBottomSheetVisible(false);
                 setLoaderVisible(false);
                 setPopOverVisible(false);
+                bottomSheetRef.current?.handleVisible(false);
                 break;
             default:
                 break;

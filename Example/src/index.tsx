@@ -4,7 +4,7 @@ import BSTextInput from "../dist/ui/BottomSheetNotify/ui/BSTextInput";
 import PopOverButton from "../dist/ui/PopOver/PopOverButton";
 
 const NotifyExample = () => {
-    const { showAlert, showSnackBar, showBottomSheet } = useNotify();
+    const { showAlert, showSnackBar, showBottomSheet, hideNotify } = useNotify();
 
     return (
         <SafeAreaView>
@@ -90,6 +90,10 @@ const NotifyExample = () => {
                                     <View style={{ borderWidth: 1 }}>
                                         <BSTextInput />
                                     </View>
+
+                                    <TouchableOpacity style={{ padding: 30 }} onPress={() => { hideNotify('bottomSheet') }}>
+                                        <Text>닫기</Text>
+                                    </TouchableOpacity>
                                 </View>
                         });
                     }}
