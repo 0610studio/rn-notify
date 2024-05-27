@@ -1,6 +1,6 @@
 {
   "name": "@0610studio/rn-notify",
-  "version": "0.0.26",
+  "version": "0.0.28",
   "private": false,
   "description": "",
   "main": "dist/index.js",

@@ -46,13 +46,13 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
     const [bottomSheetVisible, setBottomSheetVisible] = useState<boolean>(false);
     const [bottomSheetBackgroundColor, setBottomSheetBackgroundColor] = useState<string>('#ffffff');
     const [bottomSheetComponent, setBottomSheetComponent] = useState<React.ReactNode>(false);
-    const [bottomSheetPadding, setBottomSheetPadding] = useState<number>(0);
-    const [bottomSheetMarginX, setBottomSheetMarginX] = useState<number>(0);
+    const [bottomSheetPadding, setBottomSheetPadding] = useState<number | undefined>(undefined);
+    const [bottomSheetMarginX, setBottomSheetMarginX] = useState<number | undefined>(undefined);
     const [bottomSheetMaxHeight, setBottomSheetMaxHeight] = useState<number>(BS_MAX_HEIGHT);
     const [bottomSheetScrollView, setBottomSheetScrollView] = useState<boolean>(true);
     const [isBottomRadius, setIsBottomRadius] = useState<boolean>(true);
     const [handleVisible, setHandleVisible] = useState<boolean>(true);
-    const [marginBottomBS, setMarginBottomBs] = useState<number>(0);
+    const [marginBottomBS, setMarginBottomBs] = useState<number | undefined>(undefined);
     const bottomSheetRef = useRef<BottomSheetRef | null>(null);
 
     // Loading
