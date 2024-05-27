@@ -7,33 +7,34 @@ import { BottomSheetNotifyRef } from './types';
 import ContentsComponent from './ui/ContentsComponent';
 
 const DEFAULT_BORDER_RADIUS = 24;
+const BS_MAX_HEIGHT = Dimensions.get('window').height - 120;
 
 interface Props extends ViewProps {
-  marginBottomBS: number;
-  bottomSheetPadding: number;
-  bottomSheetBackgroundColor: string;
+  marginBottomBS?: number;
+  bottomSheetBackgroundColor?: string;
+  bottomSheetPadding?: number;
   closeOffset?: number;
-  contentsGestureEnable: boolean;
+  contentsGestureEnable?: boolean;
+  isHandleVisible?: boolean;
+  bottomSheetMarginX?: number;
+  isBottomRadius?: boolean;
+  maxHeight?: number;
+  isScrollView?: boolean;
   bottomSheetComponent: React.ReactNode;
-  isHandleVisible: boolean;
-  bottomSheetMarginX: number;
-  isBottomRadius: boolean;
-  maxHeight: number;
-  isScrollView: boolean;
 }
 
 const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
-  marginBottomBS,
-  bottomSheetPadding,
-  bottomSheetBackgroundColor,
+  marginBottomBS = 10,
+  bottomSheetPadding = 20,
+  bottomSheetBackgroundColor = '#ffffff',
   closeOffset = Dimensions.get('window').height,
-  contentsGestureEnable,
+  contentsGestureEnable = true,
+  isHandleVisible = true,
+  bottomSheetMarginX = 10,
+  isBottomRadius = true,
+  isScrollView = true,
+  maxHeight = BS_MAX_HEIGHT,
   bottomSheetComponent,
-  isHandleVisible,
-  bottomSheetMarginX,
-  isBottomRadius,
-  maxHeight,
-  isScrollView
 }, ref) => {
   const {
     bottomSheetVisible,

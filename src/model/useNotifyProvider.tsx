@@ -100,28 +100,28 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
     };
 
     const showBottomSheet = ({
-        isHandleVisible = true,
+        isHandleVisible,
         component,
-        contentsGestureEnable = true,
-        marginHorizontal = 10,
-        padding = 20,
-        marginBottom = 10,
-        backgroundColor = '#ffffff',
-        isBottomRadius = true,
-        maxHeight = BS_MAX_HEIGHT,
-        isScrollView = true
+        contentsGestureEnable,
+        marginHorizontal,
+        padding,
+        marginBottom,
+        backgroundColor,
+        isBottomRadius,
+        maxHeight,
+        isScrollView
     }: ShowBottomSheetProps) => {
         Keyboard.dismiss();
-        setHandleVisible(isHandleVisible);
-        setBottomSheetPadding(padding);
-        setContentsGestureEnable(contentsGestureEnable);
+        isHandleVisible && setHandleVisible(isHandleVisible);
+        padding && setBottomSheetPadding(padding);
+        contentsGestureEnable && setContentsGestureEnable(contentsGestureEnable);
+        marginBottom && setMarginBottomBs(marginBottom);
+        marginHorizontal && setBottomSheetMarginX(marginHorizontal);
+        isBottomRadius && setIsBottomRadius(isBottomRadius);
+        backgroundColor && setBottomSheetBackgroundColor(backgroundColor);
+        maxHeight && setBottomSheetMaxHeight(maxHeight);
+        isScrollView && setBottomSheetScrollView(isScrollView);
         setBottomSheetComponent(component);
-        setMarginBottomBs(marginBottom);
-        setBottomSheetMarginX(marginHorizontal);
-        setIsBottomRadius(isBottomRadius);
-        setBottomSheetBackgroundColor(backgroundColor);
-        setBottomSheetMaxHeight(maxHeight);
-        setBottomSheetScrollView(isScrollView);
         bottomSheetRef.current?.handleVisible(true);
     };
 

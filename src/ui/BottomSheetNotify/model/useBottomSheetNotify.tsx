@@ -8,7 +8,6 @@ import {
     Easing,
     runOnJS,
 } from 'react-native-reanimated';
-import { useNotify } from '../../../model/useNotifyProvider';
 
 const DIMENSIONS_HEIGHT = Dimensions.get('window').height;
 const INPUT_HEIGHT_CORRECTION = 55; // 인풋 높이 보정
@@ -44,11 +43,6 @@ const useBottomSheetNotify = ({
     bottomSheetMarginX,
     isHandleVisible,
 }: Props) => {
-    const {
-        bottomSheetVisible,
-        setBottomSheetVisible,
-    } = useNotify();
-
     const handleHeight = isHandleVisible ? HANDLE_HEIGHT : 0;
     const correction =
         marginBottomBS
@@ -67,6 +61,7 @@ const useBottomSheetNotify = ({
     const translateY = useSharedValue(closeOffset);
     const fullScreen = useSharedValue(false);
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+    const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
 
     const bsModalBgStyle = useAnimatedStyle(() => ({
         backgroundColor: `#1E1E1E${bgOpacity.value}`,

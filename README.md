@@ -116,3 +116,24 @@ showBottomSheet({
 </PopOverButton>
 
 ```
+
+.
+
+### BottomSheet 내부 정의
+showBottomSheet를 사용해서 component 전달시 component 내부에 정의된 함수가 갱신되지 않기 때문에 동적으로 사용하려면 아래 처럼 사용. 
+```tsx
+const bottomSheetRef = useRef<BottomSheetRef | null>(null);
+
+const showBottomSheet = () => {
+    bottomSheetRef.current?.handleVisible(true);
+}
+
+<BottomSheetNotify
+    ref={bottomSheetRef}
+    bottomSheetComponent={
+        <View style={{ padding: 50 }}>
+            <TextInput style={{ borderWidth: 1 }}></TextInput>
+        </View>
+    }
+/>
+```
