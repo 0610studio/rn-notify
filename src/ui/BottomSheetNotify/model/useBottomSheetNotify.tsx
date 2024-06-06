@@ -181,7 +181,7 @@ const useBottomSheetNotify = ({
             runOnJS(dismissKeyboard)();
 
             // 제스쳐 영역
-            if ((openPosition.value + handleHeight + correction) > event.absoluteY) {
+            if ((openPosition.value + handleHeight) > event.absoluteY) {
                 gestureComponent.value = 'Handler';
                 bsScale.value = withTiming(0.98, timingConfig100);
 
