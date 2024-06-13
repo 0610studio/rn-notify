@@ -46,7 +46,7 @@ const useBottomSheetNotify = ({
     const handleHeight = isHandleVisible ? HANDLE_HEIGHT : 0;
     const correction =
         marginBottomBS
-        + HANDLE_HEIGHT
+        + handleHeight
         + (Platform.OS === 'android' ? -12 : 0); // TODO: 안드로이드 보정 -12 이유 찾기.
     const panGestureRef = useRef<GestureType>(Gesture.Pan());
     const listScrollPosition = useSharedValue(0);
@@ -134,7 +134,7 @@ const useBottomSheetNotify = ({
 
         const keyboardDidHideListener = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => {
             setIsKeyboardVisible(false);
-            
+
             // 키보드가 사라질 때 화면의 높이를 원래대로 돌립니다.
             if (!fullScreen.value) return;
             handleVisible(true);
@@ -181,7 +181,7 @@ const useBottomSheetNotify = ({
             runOnJS(dismissKeyboard)();
 
             // 제스쳐 영역
-            if ((openPosition.value + handleHeight) > event.absoluteY) {
+            if ((openPosition.value + handleHeight + correction) > event.absoluteY) {
                 gestureComponent.value = 'Handler';
                 bsScale.value = withTiming(0.98, timingConfig100);
 
