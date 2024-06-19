@@ -1,10 +1,10 @@
-import { Button, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { Button, SafeAreaView, Text, TextInput, View } from "react-native"
 import { useNotify } from "../dist";
-import BSTextInput from "../dist/ui/BottomSheetNotify/ui/BSTextInput";
 import PopOverButton from "../dist/ui/PopOver/PopOverButton";
+import MyBottomSheet from "./MyBottomSheet";
 
 const NotifyExample = () => {
-    const { showAlert, showSnackBar, showBottomSheet, hideNotify } = useNotify();
+    const { showAlert, showSnackBar, showBottomSheet } = useNotify();
 
     return (
         <SafeAreaView>
@@ -86,22 +86,18 @@ const NotifyExample = () => {
                             padding: 0,
                             isBottomRadius: true,
                             component:
-                                <View style={{ padding: 50, backgroundColor: 'white' }}>
-                                    <View style={{ borderWidth: 1 }}>
-                                        <BSTextInput />
-                                    </View>
-
-                                    <TouchableOpacity style={{ padding: 30 }} onPress={() => { hideNotify('bottomSheet') }}>
-                                        <Text>닫기</Text>
-                                    </TouchableOpacity>
-                                </View>
+                                <MyBottomSheet
+                                    event={() => {
+                                        console.log('event');
+                                    }}
+                                />
                         });
                     }}
                     title="show_BottomSheet"
                     color="#331599"
                 />
 
-                <TextInput style={{width:'100%', height:50,borderWidth:1}}></TextInput>
+                <TextInput style={{ width: '100%', height: 50, borderWidth: 1 }}></TextInput>
             </View>
         </SafeAreaView>
     )

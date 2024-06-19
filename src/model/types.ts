@@ -8,6 +8,7 @@ export interface NotifyProps {
     snackItemStack: SnackItem[];
     hideSnackBar: (index: number) => void;
     // ---
+    bottomSheetComponent: React.ReactNode;
     bottomSheetVisible: boolean;
     setBottomSheetVisible: (visible: boolean) => void;
     // ---
