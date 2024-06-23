@@ -78,9 +78,11 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
           style={styles.subBg}
           onPress={backgroundPressHandler}
         > */}
-          <GestureHandlerRootView style={styles.rootViewWrapper}>
-            <GestureDetector gesture={onGestureEvent}>
-              <Animated.View style={[styles.sheet, {
+        <GestureHandlerRootView style={styles.rootViewWrapper}>
+          <GestureDetector gesture={onGestureEvent}>
+            <Animated.View
+              onTouchEnd={(e) => { e.stopPropagation(); }}
+              style={[styles.sheet, {
                 width: screenWidth,
                 height: screenHeight,
                 paddingHorizontal: bottomSheetPadding,
@@ -92,36 +94,36 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
                 borderBottomRightRadius: isBottomRadius ? DEFAULT_BORDER_RADIUS : 0,
                 backgroundColor: bottomSheetBackgroundColor,
               }, bsAnimatedStyle]}>
-                <Pressable
-                  onPress={() => {
-                    Keyboard.dismiss();
-                  }}
-                >
-                  {
-                    isHandleVisible &&
-                    <View style={styles.handleContainer}>
-                      <View style={styles.handle} />
-                    </View>
-                  }
+              <Pressable
+                onPress={() => {
+                  Keyboard.dismiss();
+                }}
+              >
+                {
+                  isHandleVisible &&
+                  <View style={styles.handleContainer}>
+                    <View style={styles.handle} />
+                  </View>
+                }
 
-                  <GestureDetector gesture={onTapEvent}>
-                    <ContentsComponent
-                      panGestureRef={panGestureRef}
-                      listScrollPosition={listScrollPosition}
-                      handleHeight={handleHeight}
-                      openPosition={openPosition}
-                      correction={correction}
-                      screenHeight={screenHeight}
-                      bottomSheetComponent={bottomSheetComponent}
-                      bottomSheetPadding={bottomSheetPadding}
-                      maxHeight={maxHeight}
-                      isScrollView={isScrollView}
-                    />
-                  </GestureDetector>
-                </Pressable>
-              </Animated.View>
-            </GestureDetector>
-          </GestureHandlerRootView>
+                <GestureDetector gesture={onTapEvent}>
+                  <ContentsComponent
+                    panGestureRef={panGestureRef}
+                    listScrollPosition={listScrollPosition}
+                    handleHeight={handleHeight}
+                    openPosition={openPosition}
+                    correction={correction}
+                    screenHeight={screenHeight}
+                    bottomSheetComponent={bottomSheetComponent}
+                    bottomSheetPadding={bottomSheetPadding}
+                    maxHeight={maxHeight}
+                    isScrollView={isScrollView}
+                  />
+                </GestureDetector>
+              </Pressable>
+            </Animated.View>
+          </GestureDetector>
+        </GestureHandlerRootView>
         {/* </Pressable> */}
       </Animated.View>
       : null
