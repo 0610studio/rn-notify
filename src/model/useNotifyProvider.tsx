@@ -197,7 +197,6 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
             snackItemStack,
             hideSnackBar,
             // ---
-            bottomSheetComponent,
             bottomSheetVisible,
             setBottomSheetVisible,
             // ---
@@ -218,6 +217,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
 
             <BottomSheetNotify
                 ref={bottomSheetRef}
+                bottomSheetComponent={bottomSheetComponent}
                 contentsGestureEnable={contentsGestureEnable}
                 bottomSheetPadding={bottomSheetPadding}
                 marginBottomBS={marginBottomBS}

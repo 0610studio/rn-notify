@@ -5,7 +5,6 @@ import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import useBottomSheetNotify from './model/useBottomSheetNotify';
 import { BottomSheetNotifyRef } from './types';
 import ContentsComponent from './ui/ContentsComponent';
-import { useNotify } from '../../model/useNotifyProvider';
 
 const DEFAULT_BORDER_RADIUS = 24;
 const BS_MAX_HEIGHT = Dimensions.get('window').height - 120;
@@ -21,6 +20,7 @@ interface Props extends ViewProps {
   isBottomRadius?: boolean;
   maxHeight?: number;
   isScrollView?: boolean;
+  bottomSheetComponent: React.ReactNode;
 }
 
 const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
@@ -34,6 +34,7 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
   isBottomRadius = true,
   isScrollView = true,
   maxHeight = BS_MAX_HEIGHT,
+  bottomSheetComponent
 }, ref) => {
   const {
     bottomSheetVisible,
@@ -58,8 +59,6 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
     bottomSheetMarginX,
     isHandleVisible,
   });
-
-  const { bottomSheetComponent } = useNotify();
 
   useImperativeHandle(ref, () => ({
     handleVisible,
