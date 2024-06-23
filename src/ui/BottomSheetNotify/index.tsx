@@ -72,11 +72,12 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
         style={[styles.modalBg, bsModalBgStyle]}
         entering={FadeIn.duration(50)}
         exiting={FadeOut.duration(50)}
+        onTouchEnd={backgroundPressHandler}
       >
-        <Pressable
+        {/* <Pressable
           style={styles.subBg}
           onPress={backgroundPressHandler}
-        >
+        > */}
           <GestureHandlerRootView style={styles.rootViewWrapper}>
             <GestureDetector gesture={onGestureEvent}>
               <Animated.View style={[styles.sheet, {
@@ -121,7 +122,7 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
               </Animated.View>
             </GestureDetector>
           </GestureHandlerRootView>
-        </Pressable>
+        {/* </Pressable> */}
       </Animated.View>
       : null
   );
