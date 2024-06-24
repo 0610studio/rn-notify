@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, View } from "react-native";
-import { useNotify } from "../../model/useNotifyProvider";
 import { CustomSnackbarProps } from "../../model/types";
 import SnackbarItem from "./ui/SnackbarItem";
+import { useNotify } from "../../model/useNotify";
 
 
 const SnackbarNotify = ({

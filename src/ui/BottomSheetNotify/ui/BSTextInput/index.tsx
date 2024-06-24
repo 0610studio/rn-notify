@@ -1,9 +1,8 @@
 import { useRef } from "react";
 import { Platform, Pressable } from "react-native";
-import { TextInputProps } from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
 
-type Props = TextInputProps & {
+type Props = {
 };
 
 const BSTextInput = ({ ...props }: Props) => {

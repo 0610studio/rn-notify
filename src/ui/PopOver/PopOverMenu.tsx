@@ -1,8 +1,8 @@
 import { BackHandler, Dimensions, LayoutChangeEvent, Pressable, StyleSheet } from "react-native";
-import { useNotify } from "../../model/useNotifyProvider";
 import { PopOverMenuProps } from "../../model/types";
 import Animated, { FadeIn, FadeInUp, FadeOut, FadeOutUp } from "react-native-reanimated";
 import { useCallback, useEffect, useState } from "react";
+import { useNotify } from "../../model/useNotify";
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 

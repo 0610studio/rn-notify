@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle } from 'react';
-import { StyleSheet, Dimensions, View, ViewProps, Keyboard, Pressable } from 'react-native';
+import { StyleSheet, Dimensions, View, ViewProps, Keyboard } from 'react-native';
 import { GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import useBottomSheetNotify from './model/useBottomSheetNotify';
@@ -42,9 +42,7 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
     onGestureEvent,
     handleVisible,
     onTapEvent,
-    handleHeight,
     openPosition,
-    correction,
     screenWidth,
     screenHeight,
     panGestureRef,
@@ -73,14 +71,13 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
         exiting={FadeOut.duration(50)}
         onTouchEnd={backgroundPressHandler}
       >
-        {/* <Pressable
-          style={styles.subBg}
-          onPress={backgroundPressHandler}
-        > */}
         <GestureHandlerRootView style={styles.rootViewWrapper}>
           <GestureDetector gesture={onGestureEvent}>
             <Animated.View
-              onTouchEnd={(e) => { e.stopPropagation(); }}
+              onTouchEnd={(e) => {
+                e.stopPropagation();
+                Keyboard.dismiss();
+              }}
               style={[styles.sheet, {
                 width: screenWidth,
                 height: screenHeight,
@@ -93,37 +90,29 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
                 borderBottomRightRadius: isBottomRadius ? DEFAULT_BORDER_RADIUS : 0,
                 backgroundColor: bottomSheetBackgroundColor,
               }, bsAnimatedStyle]}>
-              <Pressable
-                onPress={() => {
-                  Keyboard.dismiss();
-                }}
-              >
-                {
-                  isHandleVisible &&
-                  <View style={styles.handleContainer}>
-                    <View style={styles.handle} />
-                  </View>
-                }
+              {
+                isHandleVisible &&
+                <View style={styles.handleContainer}>
+                  <View style={styles.handle} />
+                </View>
+              }
 
-                <GestureDetector gesture={onTapEvent}>
-                  <ContentsComponent
-                    panGestureRef={panGestureRef}
-                    listScrollPosition={listScrollPosition}
-                    handleHeight={handleHeight}
-                    openPosition={openPosition}
-                    correction={correction}
-                    screenHeight={screenHeight}
-                    bottomSheetComponent={bottomSheetComponent}
-                    bottomSheetPadding={bottomSheetPadding}
-                    maxHeight={maxHeight}
-                    isScrollView={isScrollView}
-                  />
-                </GestureDetector>
-              </Pressable>
+              <GestureDetector gesture={onTapEvent}>
+                <ContentsComponent
+                  panGestureRef={panGestureRef}
+                  listScrollPosition={listScrollPosition}
+                  openPosition={openPosition}
+                  marginBottomBS={marginBottomBS}
+                  screenHeight={screenHeight}
+                  bottomSheetComponent={bottomSheetComponent}
+                  bottomSheetPadding={bottomSheetPadding}
+                  maxHeight={maxHeight}
+                  isScrollView={isScrollView}
+                />
+              </GestureDetector>
             </Animated.View>
           </GestureDetector>
         </GestureHandlerRootView>
-        {/* </Pressable> */}
       </Animated.View>
       : null
   );

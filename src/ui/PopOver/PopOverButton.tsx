@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 import { View, Pressable, ViewProps, StyleSheet } from 'react-native';
-import { useNotify } from '../../model/useNotifyProvider';
+import { useNotify } from '../../model/useNotify';
 
 interface PopOverButtonProps extends ViewProps {
   width: number;

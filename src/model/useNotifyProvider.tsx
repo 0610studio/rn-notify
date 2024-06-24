@@ -1,6 +1,7 @@
-import { createContext, useCallback, useContext, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Dimensions, Keyboard, TextProps, TouchableOpacityProps } from 'react-native';
-import { AlertActions, BottomSheetRef, HideOption, NotifyProps, NotifyProviderProps, PopOverMenuProps, ShowAlertProps, ShowBottomSheetProps, ShowSnackBarProps, SnackItem } from './types';
+import NotifyContext from './useNotify';
+import { AlertActions, BottomSheetRef, HideOption, NotifyProviderProps, PopOverMenuProps, ShowAlertProps, ShowBottomSheetProps, ShowSnackBarProps, SnackItem } from './types';
 import AlertNotify from '../ui/AlertNotify';
 import SnackbarNotify from '../ui/SnackbarNotify';
 import BottomSheetNotify from '../ui/BottomSheetNotify';
@@ -8,16 +9,6 @@ import LoadingNotify from '../ui/LoadingNotify';
 import PopOverMenu from '../ui/PopOver/PopOverMenu';
 
 const BS_MAX_HEIGHT = Dimensions.get('window').height - 120;
-
-const NotifyContext = createContext<NotifyProps | null>(null);
-
-export const useNotify = () => {
-    const context = useContext(NotifyContext);
-    if (!context) {
-        throw new Error('useNotify must be used within a NotifyProvider');
-    }
-    return context;
-}
 
 export const NotifyProvider: React.FC<NotifyProviderProps> = ({
     customSnackbar,

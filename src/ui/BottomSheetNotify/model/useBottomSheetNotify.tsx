@@ -10,7 +10,7 @@ import {
 } from 'react-native-reanimated';
 
 const DIMENSIONS_HEIGHT = Dimensions.get('window').height;
-const INPUT_HEIGHT_CORRECTION = 55; // 인풋 높이 보정
+const INPUT_HEIGHT_CORRECTION = 40; // 인풋 높이 보정
 const NATURAL_GESTURE_TOP = -17; // 자연스러운 제스쳐를 위해 상단 여유 공간 추가
 const NATURAL_GESTURE_X = 8;
 const DEFAULT_BG_OPACITY = 40;
@@ -36,7 +36,6 @@ interface Props {
 }
 
 const useBottomSheetNotify = ({
-    marginBottomBS,
     bottomSheetPadding,
     closeOffset,
     contentsGestureEnable,
@@ -44,10 +43,6 @@ const useBottomSheetNotify = ({
     isHandleVisible,
 }: Props) => {
     const handleHeight = isHandleVisible ? HANDLE_HEIGHT : 0;
-    const correction =
-        marginBottomBS
-        + handleHeight
-        + (Platform.OS === 'android' ? -12 : 0); // TODO: 안드로이드 보정 -12 이유 찾기.
     const panGestureRef = useRef<GestureType>(Gesture.Pan());
     const listScrollPosition = useSharedValue(0);
     const gestureComponent = useSharedValue('');
@@ -181,7 +176,7 @@ const useBottomSheetNotify = ({
             runOnJS(dismissKeyboard)();
 
             // 제스쳐 영역
-            if ((openPosition.value + correction) > event.absoluteY) {
+            if ((openPosition.value + handleHeight) > event.absoluteY) {
                 gestureComponent.value = 'Handler';
                 bsScale.value = withTiming(0.98, timingConfig100);
 
@@ -244,7 +239,6 @@ const useBottomSheetNotify = ({
         screenHeight,
         handleHeight,
         openPosition,
-        correction,
         bottomSheetPadding,
         onTapEvent,
         panGestureRef,

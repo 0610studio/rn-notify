@@ -6,9 +6,8 @@ import { SharedValue } from "react-native-reanimated";
 interface Props {
     panGestureRef: React.MutableRefObject<GestureType>;
     listScrollPosition: SharedValue<number>;
-    handleHeight: number;
     openPosition: SharedValue<number>;
-    correction: number;
+    marginBottomBS: number;
     screenHeight: SharedValue<number>;
     bottomSheetComponent: React.ReactNode;
     bottomSheetPadding: number;
@@ -19,9 +18,8 @@ interface Props {
 const ContentsComponent = ({
     panGestureRef,
     listScrollPosition,
-    handleHeight,
     openPosition,
-    correction,
+    marginBottomBS,
     screenHeight,
     bottomSheetComponent,
     bottomSheetPadding,
@@ -32,8 +30,8 @@ const ContentsComponent = ({
     const onLayout = (event: LayoutChangeEvent) => {
         let { height } = event.nativeEvent.layout;
         height = height > maxHeight ? maxHeight : height;
-        screenHeight.value = (height + handleHeight);
-        openPosition.value = Dimensions.get('window').height - height - handleHeight - correction;
+        screenHeight.value = height;
+        openPosition.value = Dimensions.get('window').height - height - marginBottomBS;
     };
 
     // 현재 스크롤 위치

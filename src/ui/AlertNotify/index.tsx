@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { Dimensions, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TouchableOpacity, View, BackHandler } from 'react-native';
 import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
-import { useNotify } from '../../model/useNotifyProvider';
 import { AlertActions, ShowAlertProps } from '../../model/types';
+import { useNotify } from '../../model/useNotify';
+
+const modalWidth = Dimensions.get('window').width - 60;
 
 const AlertNotify = ({
   actions,
@@ -22,8 +24,6 @@ const AlertNotify = ({
     alertVisible,
     setAlertVisible
   } = useNotify();
-
-  const modalWidth = Dimensions.get('window').width - 60;
 
   const handleButtonPress = useCallback((onPressFunction: any) => () => {
     if (onPressFunction) {

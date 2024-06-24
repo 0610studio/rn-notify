@@ -1,7 +1,7 @@
 import { ActivityIndicator, Dimensions, StyleSheet } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { useNotify } from "../../model/useNotifyProvider";
 import { ReactNode } from "react";
+import { useNotify } from "../../model/useNotify";
 
 const LoadingNotify = ({
     loaderComponent
