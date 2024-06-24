@@ -147,7 +147,7 @@ const useBottomSheetNotify = ({
                 return openBottomSheet();
             translateY.value = withTiming(openPosition.value, timingConfig200);
             fullScreen.value = true;
-        }, 100);
+        }, 300);
     }
 
     const handleVisible = (isOpen: boolean) => {
