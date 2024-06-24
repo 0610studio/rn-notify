@@ -91,16 +91,16 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
     };
 
     const showBottomSheet = ({
-        isHandleVisible,
+        isHandleVisible = true,
         component,
-        contentsGestureEnable,
+        contentsGestureEnable = true,
         marginHorizontal,
         padding,
         marginBottom,
         backgroundColor,
-        isBottomRadius,
+        isBottomRadius = true,
         maxHeight,
-        isScrollView
+        isScrollView = true
     }: ShowBottomSheetProps) => {
         Keyboard.dismiss();
         padding && setBottomSheetPadding(padding);
@@ -108,10 +108,10 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
         marginHorizontal && setBottomSheetMarginX(marginHorizontal);
         backgroundColor && setBottomSheetBackgroundColor(backgroundColor);
         maxHeight && setBottomSheetMaxHeight(maxHeight);
-        setContentsGestureEnable(contentsGestureEnable || false);
-        setHandleVisible(isHandleVisible || false);
-        setBottomSheetScrollView(isScrollView || false);
-        setIsBottomRadius(isBottomRadius || false);
+        setContentsGestureEnable(contentsGestureEnable);
+        setHandleVisible(isHandleVisible);
+        setBottomSheetScrollView(isScrollView);
+        setIsBottomRadius(isBottomRadius);
         setBottomSheetComponent(component);
         bottomSheetRef.current?.handleVisible(true);
     };
