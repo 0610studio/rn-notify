@@ -37,6 +37,7 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
   bottomSheetComponent
 }, ref) => {
   const {
+    HANDLE_HEIGHT,
     bottomSheetVisible,
     bsAnimatedStyle,
     onGestureEvent,
@@ -92,13 +93,14 @@ const BottomSheetNotify = forwardRef<BottomSheetNotifyRef, Props>(({
               }, bsAnimatedStyle]}>
               {
                 isHandleVisible &&
-                <View style={styles.handleContainer}>
+                <View style={[styles.handleContainer, { height: HANDLE_HEIGHT }]}>
                   <View style={styles.handle} />
                 </View>
               }
 
               <GestureDetector gesture={onTapEvent}>
                 <ContentsComponent
+                  HANDLE_HEIGHT={HANDLE_HEIGHT}
                   panGestureRef={panGestureRef}
                   listScrollPosition={listScrollPosition}
                   openPosition={openPosition}
@@ -137,10 +139,8 @@ const styles = StyleSheet.create({
   },
   handleContainer: {
     width: '100%',
-    justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 13,
-    paddingBottom: 20,
     backgroundColor: 'white',
   },
   handle: {

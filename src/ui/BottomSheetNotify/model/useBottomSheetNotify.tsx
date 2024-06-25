@@ -14,7 +14,7 @@ const INPUT_HEIGHT_CORRECTION = 40; // 인풋 높이 보정
 const NATURAL_GESTURE_TOP = -17; // 자연스러운 제스쳐를 위해 상단 여유 공간 추가
 const NATURAL_GESTURE_X = 8;
 const DEFAULT_BG_OPACITY = 40;
-const HANDLE_HEIGHT = 37;
+const HANDLE_HEIGHT = 35;
 
 const timingConfig100 = {
     duration: 100,
@@ -147,7 +147,7 @@ const useBottomSheetNotify = ({
                 return openBottomSheet();
             translateY.value = withTiming(openPosition.value, timingConfig200);
             fullScreen.value = true;
-        }, 300);
+        }, 200);
     }
 
     const handleVisible = (isOpen: boolean) => {
@@ -231,6 +231,7 @@ const useBottomSheetNotify = ({
     screenWidth.value = (Dimensions.get('window').width) - (bottomSheetMarginX ? bottomSheetMarginX * 2 : 0);
 
     return {
+        HANDLE_HEIGHT,
         bottomSheetVisible,
         bsAnimatedStyle,
         onGestureEvent,

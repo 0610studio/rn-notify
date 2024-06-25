@@ -1,9 +1,12 @@
 import { useCallback } from "react";
-import { Dimensions, LayoutChangeEvent, NativeScrollEvent, NativeSyntheticEvent, View } from "react-native";
+import { Dimensions, LayoutChangeEvent, NativeScrollEvent, NativeSyntheticEvent, Platform, View } from "react-native";
 import { GestureType, ScrollView } from "react-native-gesture-handler";
 import { SharedValue } from "react-native-reanimated";
 
+const ANDROID_STATUS_BAR_HEIGHT = Platform.OS === 'android' ? 25 : 0;
+
 interface Props {
+    HANDLE_HEIGHT: number;
     panGestureRef: React.MutableRefObject<GestureType>;
     listScrollPosition: SharedValue<number>;
     openPosition: SharedValue<number>;
@@ -16,6 +19,7 @@ interface Props {
 }
 
 const ContentsComponent = ({
+    HANDLE_HEIGHT,
     panGestureRef,
     listScrollPosition,
     openPosition,
@@ -28,10 +32,11 @@ const ContentsComponent = ({
 }: Props) => {
 
     const onLayout = (event: LayoutChangeEvent) => {
-        let { height } = event.nativeEvent.layout;
-        height = height > maxHeight ? maxHeight : height;
-        screenHeight.value = height;
-        openPosition.value = Dimensions.get('window').height - height - marginBottomBS;
+        const { height } = event.nativeEvent.layout;
+        const contentMaxHeight = maxHeight + HANDLE_HEIGHT;
+        const resultHeight = height > contentMaxHeight ? contentMaxHeight : height;
+        screenHeight.value = resultHeight + HANDLE_HEIGHT;
+        openPosition.value = Dimensions.get('window').height - resultHeight - marginBottomBS - ANDROID_STATUS_BAR_HEIGHT - HANDLE_HEIGHT;
     };
 
     // 현재 스크롤 위치

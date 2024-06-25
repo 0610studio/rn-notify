@@ -1,6 +1,6 @@
-import { ActivityIndicator, Dimensions, StyleSheet } from "react-native";
+import { ActivityIndicator, Dimensions, StyleSheet, BackHandler } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { useNotify } from "../../model/useNotify";
 
 const LoadingNotify = ({
@@ -8,9 +8,19 @@ const LoadingNotify = ({
 }: {
     loaderComponent?: () => ReactNode
 }) => {
-    const {
-        loaderVisible,
-    } = useNotify();
+    const { loaderVisible } = useNotify();
+
+    useEffect(() => {
+        const handleBackPressed = () => {
+            return true;
+        };
+
+        const handler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            handleBackPressed,
+        );
+        return () => handler.remove();
+    }, []);
 
     return loaderVisible ? (
         <Animated.View
