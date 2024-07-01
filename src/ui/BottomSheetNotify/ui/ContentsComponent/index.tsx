@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { Dimensions, LayoutChangeEvent, NativeScrollEvent, NativeSyntheticEvent, Platform, View } from "react-native";
 import { GestureType, ScrollView } from "react-native-gesture-handler";
 import { SharedValue } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ANDROID_STATUS_BAR_HEIGHT = Platform.OS === 'android' ? 25 : 0;
 
@@ -30,13 +31,14 @@ const ContentsComponent = ({
     maxHeight,
     isScrollView
 }: Props) => {
+    const { bottom } = useSafeAreaInsets();
 
     const onLayout = (event: LayoutChangeEvent) => {
         const { height } = event.nativeEvent.layout;
         const contentMaxHeight = maxHeight + HANDLE_HEIGHT;
         const resultHeight = height > contentMaxHeight ? contentMaxHeight : height;
         screenHeight.value = resultHeight + HANDLE_HEIGHT;
-        openPosition.value = Dimensions.get('window').height - resultHeight - marginBottomBS - ANDROID_STATUS_BAR_HEIGHT - HANDLE_HEIGHT;
+        openPosition.value = Dimensions.get('window').height - resultHeight - marginBottomBS - bottom - ANDROID_STATUS_BAR_HEIGHT - HANDLE_HEIGHT;
     };
 
     // 현재 스크롤 위치

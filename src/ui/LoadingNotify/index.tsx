@@ -12,7 +12,8 @@ const LoadingNotify = ({
 
     useEffect(() => {
         const handleBackPressed = () => {
-            return true;
+            if (loaderVisible) return true;
+            return false;
         };
 
         const handler = BackHandler.addEventListener(
@@ -20,7 +21,7 @@ const LoadingNotify = ({
             handleBackPressed,
         );
         return () => handler.remove();
-    }, []);
+    }, [loaderVisible]);
 
     return loaderVisible ? (
         <Animated.View
