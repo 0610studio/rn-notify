@@ -152,16 +152,16 @@ const useBottomSheetNotify = ({
     }
 
     // 렌더링이 늦게 되는 경우 바텀시트의 높이를 다시 조정해줍니다.
+    const onOpenPositionChange = (value: number) => {
+        if (fullScreen.value && screenHeight.value !== 1) {
+            translateY.value = withTiming(value, timingConfig200);
+        }
+    };
+    
     useDerivedValue(() => {
         runOnJS(onOpenPositionChange)(openPosition.value);
         return openPosition.value;
     }, [openPosition.value]);
-
-    const onOpenPositionChange = (value: number) => {
-        if (fullScreen.value && screenHeight.value !== 1) {
-            translateY.value = withTiming(openPosition.value, timingConfig200);
-        }
-    };
 
     const handleVisible = (isOpen: boolean) => {
         if (isOpen) {
