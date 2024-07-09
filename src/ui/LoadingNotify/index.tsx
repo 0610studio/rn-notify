@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#212B3688',
         zIndex: 9999,
+        bottom: 0
     }
 });
 

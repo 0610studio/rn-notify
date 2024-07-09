@@ -125,12 +125,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-  },
-  subBg: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-    justifyContent: 'center',
-    alignItems: 'center',
+    bottom: 0
   },
   sheet: {
     position: 'absolute',

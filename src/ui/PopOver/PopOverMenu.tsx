@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#212B3688',
         zIndex: 9997,
+        bottom: 0
     }
 });
 

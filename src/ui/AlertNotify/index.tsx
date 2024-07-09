@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#212B3688',
     zIndex: 9998,
+    bottom: 0
   },
   title: {
     color: '#232323',
