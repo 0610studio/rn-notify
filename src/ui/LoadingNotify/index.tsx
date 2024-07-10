@@ -2,6 +2,7 @@ import { ActivityIndicator, Dimensions, StyleSheet, BackHandler } from "react-na
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { ReactNode, useEffect } from "react";
 import { useNotify } from "../../model/useNotify";
+import { modalBgColor } from "../../model/constants";
 
 const LoadingNotify = ({
     loaderComponent
@@ -40,15 +41,11 @@ const LoadingNotify = ({
 
 const styles = StyleSheet.create({
     modalBg: {
-        flex: 1,
-        position: 'absolute',
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#212B3688',
         zIndex: 9999,
-        bottom: 0
+        backgroundColor: modalBgColor,
+        ...StyleSheet.absoluteFillObject
     }
 });
 

@@ -3,6 +3,7 @@ import { Dimensions, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text
 import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 import { AlertActions, ShowAlertProps } from '../../model/types';
 import { useNotify } from '../../model/useNotify';
+import { modalBgColor } from '../../model/constants';
 
 const modalWidth = Dimensions.get('window').width - 60;
 
@@ -112,15 +113,11 @@ export default AlertNotify;
 
 const styles = StyleSheet.create({
   modalBg: {
-    flex: 1,
-    position: 'absolute',
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#212B3688',
     zIndex: 9998,
-    bottom: 0
+    backgroundColor: modalBgColor,
+    ...StyleSheet.absoluteFillObject
   },
   title: {
     color: '#232323',

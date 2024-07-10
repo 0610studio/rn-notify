@@ -1,0 +1,1 @@
+export const modalBgColor = '#212B3688';

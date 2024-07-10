@@ -3,6 +3,7 @@ import { PopOverMenuProps } from "../../model/types";
 import Animated, { FadeIn, FadeInUp, FadeOut, FadeOutUp } from "react-native-reanimated";
 import { useCallback, useEffect, useState } from "react";
 import { useNotify } from "../../model/useNotify";
+import { modalBgColor } from "../../model/constants";
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 
@@ -78,15 +79,11 @@ const PopOverMenu = ({
 
 const styles = StyleSheet.create({
     modalBg: {
-        flex: 1,
-        position: 'absolute',
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#212B3688',
         zIndex: 9997,
-        bottom: 0
+        backgroundColor: modalBgColor,
+        ...StyleSheet.absoluteFillObject
     }
 });
 
