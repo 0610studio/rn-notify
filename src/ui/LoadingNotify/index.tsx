@@ -1,4 +1,4 @@
-import { ActivityIndicator, Dimensions, StyleSheet, BackHandler } from "react-native";
+import { ActivityIndicator, StyleSheet, BackHandler } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { ReactNode, useEffect } from "react";
 import { useNotify } from "../../model/useNotify";

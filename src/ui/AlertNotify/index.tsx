@@ -81,7 +81,7 @@ const AlertNotify = ({
                   onPress={handleButtonPress(primary?.onPress)}
                   hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                 >
-                  <Text numberOfLines={1} style={[styles.buttonText, { color: '#FF7F00', textAlign: 'right', marginBottom: 5, marginRight: 5, fontFamily: fontFamily }, singleButtonTextStyle]}>{primary?.label}</Text>
+                  <Text numberOfLines={1} style={[styles.buttonText, { color: '#FF7F00', textAlign: 'right', marginBottom: 5, marginRight: 5, fontFamily: fontFamily }, singleButtonTextStyle]}>{primary?.label || '확인'}</Text>
                 </TouchableOpacity>
               )}
             </View>
