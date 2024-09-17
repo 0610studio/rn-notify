@@ -55,7 +55,7 @@ export const NotifyProvider: React.FC<NotifyProviderProps> = ({
     const [popOverComponent, setPopOverComponent] = useState<React.ReactNode>(false);
 
     // ---
-    const [fontFamily, setFontFamily] = useState<string | undefined>(undefined);
+    const [fontFamily, setFontFamily] = useState<string | undefined | { title?: string; info?: string; label?: string;}>(undefined);
 
 
     const showAlert = ({
