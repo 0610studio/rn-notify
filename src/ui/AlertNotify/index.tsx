@@ -58,8 +58,8 @@ const AlertNotify = ({
         <Pressable
           style={[styles.contentContainer, { width: modalWidth }]}
         >
-          {title && <Text style={[styles.title, { fontFamily: fontFamily }, titleStyle]}>{title}</Text>}
-          {informative && <Text style={[styles.informative, { fontFamily: fontFamily }, informativeStyle]}>{informative}</Text>}
+          {title && <Text style={[styles.title, { fontFamily: typeof fontFamily === 'object' ? fontFamily?.title : fontFamily }, titleStyle]}>{title}</Text>}
+          {informative && <Text style={[styles.informative, { fontFamily: typeof fontFamily === 'object' ? fontFamily?.info : fontFamily }, informativeStyle]}>{informative}</Text>}
           {actions && (
             <View style={styles.buttonContainer}>
               {secondary ? (
@@ -67,13 +67,13 @@ const AlertNotify = ({
                   <TouchableOpacity
                     style={[styles.button, { backgroundColor: '#E7E7E7', marginRight: 8 }, secondaryButtonStyle]}
                     onPress={handleButtonPress(secondary?.onPress)}>
-                    <Text numberOfLines={1} style={[styles.buttonText, { color: '#393939', fontFamily: fontFamily }, secondaryButtonTextStyle]}>{secondary.label}</Text>
+                    <Text numberOfLines={1} style={[styles.buttonText, { color: '#393939', fontFamily: typeof fontFamily === 'object' ? fontFamily?.label : fontFamily }, secondaryButtonTextStyle]}>{secondary.label}</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity
                     style={[styles.button, { backgroundColor: '#ff9225' }, primaryButtonStyle]}
                     onPress={handleButtonPress(primary?.onPress)}>
-                    <Text numberOfLines={1} style={[styles.buttonText, { color: 'white', fontFamily: fontFamily }, primaryButtonTextStyle]}>{primary?.label}</Text>
+                    <Text numberOfLines={1} style={[styles.buttonText, { color: 'white', fontFamily: typeof fontFamily === 'object' ? fontFamily?.label : fontFamily }, primaryButtonTextStyle]}>{primary?.label}</Text>
                   </TouchableOpacity>
                 </>
               ) : (
@@ -81,7 +81,7 @@ const AlertNotify = ({
                   onPress={handleButtonPress(primary?.onPress)}
                   hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                 >
-                  <Text numberOfLines={1} style={[styles.buttonText, { color: '#FF7F00', textAlign: 'right', marginBottom: 5, marginRight: 5, fontFamily: fontFamily }, singleButtonTextStyle]}>{primary?.label || '확인'}</Text>
+                  <Text numberOfLines={1} style={[styles.buttonText, { color: '#FF7F00', textAlign: 'right', marginBottom: 5, marginRight: 5, fontFamily: typeof fontFamily === 'object' ? fontFamily?.label : fontFamily }, singleButtonTextStyle]}>{primary?.label || '확인'}</Text>
                 </TouchableOpacity>
               )}
             </View>
